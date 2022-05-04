@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <div th:fragment="table_WO">
+        WorkOrder
+        <table class="table table-striped">
+            <thead>
+    
+                <tr>
+                    <div th:each="col : ${cols}">
+                        <th th:text="${col.COLUMN_NAME}">
+                        </th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr th:each="resLst : ${resLst}">
+                    <td th:text="${resLst.work_order_id}">1</td>
+                    <td th:text="${resLst.customer_name}">1</td>
+                    <td th:text="${resLst.address}">1</td>
+                    <td th:text="${resLst.tel_no}">1</td>
+                    <td th:text="${resLst.exchange}">1</td>
+                    <td th:text="${resLst.so_number}">1</td>
+                    <td th:text="${resLst.installer}">1</td>
+                    <td th:text="${resLst.plan}">1</td>
+                    <td th:text="${resLst.cbr}">1</td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

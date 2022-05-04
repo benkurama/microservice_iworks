@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <style>
+        .vertical-scrollable> .row {
+          position: absolute;
+          top: 120px;
+          bottom: 100px;
+          left: 180px;
+          width: 50%;
+          overflow-y: scroll; 
+        }
+    </style>
+
+    <div th:fragment="table_ACC">
+            <div class="container vertical-scrollable"> 
+                    <div class="row text-center"> 
+        Accounts
+        <table class="table table-striped">
+            <thead>
+    
+                <tr>
+                    <div th:each="col : ${cols}">
+                        <th th:text="${col.COLUMN_NAME}">
+                        </th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr th:each="resLst : ${resLst}">
+                            <td th:text="${resLst.ACCOUNT_ID}"> </td>
+                            <td th:text="${resLst.ACCOUNT_NUMBER}"> </td>
+                            <td th:text="${resLst.ACCOUNT_NAME}"> </td>
+                            <!-- <td th:text="${resLst.PASSWORD_}"> </td> -->
+                            <td th:text="${resLst.QUESTION}"> </td>
+                            <td th:text="${resLst.ANSWER}"> </td>
+                            <td th:text="${resLst.RECOVER_TYPE}"> </td>
+                            <td th:text="${resLst.SEND_DESTINATION}"> </td>
+                            <td th:text="${resLst.FULL_NAME}"> </td>
+                            <td th:text="${resLst.SEX}"> </td>
+                            <td th:text="${resLst.NICK_NAME}"> </td>
+                            <td th:text="${resLst.FULL_SPELLING}"> </td>
+                            <td th:text="${resLst.SHORT_SPELLING}"> </td>
+                            <td th:text="${resLst.FULL_ENGLISH}"> </td>
+                            <td th:text="${resLst.DEGREE}"> </td>
+                            <td th:text="${resLst.DUTY}"> </td>
+                            <td th:text="${resLst.POSITION_}"> </td>
+                            <td th:text="${resLst.FUNCTION_}"> </td>
+                            <td th:text="${resLst.HEIGHT}"> </td>
+                            <td th:text="${resLst.WEIGHT}"> </td>
+                            <td th:text="${resLst.BLOOD_TYPE}"> </td>
+                            <td th:text="${resLst.BIRTHDAY}"> </td>
+                            <td th:text="${resLst.HOME_ADDRESS}"> </td>
+                            <td th:text="${resLst.HOME_ZIP}"> </td>
+                            <td th:text="${resLst.DWELL_ADDRESS}"> </td>
+                            <td th:text="${resLst.DWELL_ZIP}"> </td>
+                            <td th:text="${resLst.ID_CARD}"> </td>
+                            <td th:text="${resLst.MOBILE_PHONE_A}"> </td>
+                            <td th:text="${resLst.MOBILE_PHONE_B}"> </td>
+                            <td th:text="${resLst.HOME_PHONE}"> </td>
+                            <td th:text="${resLst.OFFICE_PHONE}"> </td>
+                            <td th:text="${resLst.DWELL_PHONE}"> </td>
+                            <td th:text="${resLst.EMAIL1}"> </td>
+                            <td th:text="${resLst.STATE}"> </td>
+                            <td th:text="${resLst.CREATE_DATE}"> </td>
+                            <td th:text="${resLst.REMARK}"> </td>
+                            <td th:text="${resLst.ORGANIZATION_ID}"> </td>
+                            <td th:text="${resLst.STAFF_POST}"> </td>
+                            <td th:text="${resLst.X_POSITION}"> </td>
+                            <td th:text="${resLst.Y_POSITION}"> </td>
+                            <td th:text="${resLst.SERVICE_LEVEL}"> </td>
+                            <td th:text="${resLst.GPS_DATE}"> </td>
+                            <td th:text="${resLst.START_METHOD}"> </td>
+                            <td th:text="${resLst.WORK_STARTTIME}"> </td>
+                            <td th:text="${resLst.WORK_ENDTIME}"> </td>
+                            <td th:text="${resLst.NOTITY_MODE}"> </td>
+                            <td th:text="${resLst.PHONEOS}"> </td>
+                            <td th:text="${resLst.PHONETYPE}"> </td>
+                            <td th:text="${resLst.EMAIL2}"> </td>
+                            <td th:text="${resLst.EPWD1}"> </td>
+                            <td th:text="${resLst.EPWD2}"> </td>
+                            <td th:text="${resLst.TEACHID}"> </td>
+                            <td th:text="${resLst.FIBERHOMEID}"> </td>
+                            <td th:text="${resLst.AVATAR}"> </td>
+                            <td th:text="${resLst.STATUS_}"> </td>
+                            <td th:text="${resLst.FIRST_NAME}"> </td>
+                            <td th:text="${resLst.MIDDLE_NAME}"> </td>
+                            <td th:text="${resLst.LAST_NAME}"> </td>
+                            <td th:text="${resLst.AGE}"> </td>
+                            <td th:text="${resLst.PLACE_OF_BIRTH}"> </td>
+                            <td th:text="${resLst.CITIZENSHIP}"> </td>
+                            <td th:text="${resLst.RELIGION}"> </td>
+                            <td th:text="${resLst.CIVIL_STATUS}"> </td>
+                            <td th:text="${resLst.ED_ATTAIN}"> </td>
+                            <td th:text="${resLst.COURSE}"> </td>
+                            <td th:text="${resLst.DATE_HIRED}"> </td>
+                            <td th:text="${resLst.AGENCY}"> </td>
+                            <td th:text="${resLst.AREA}"> </td>
+                            <td th:text="${resLst.PAG_IBIG}"> </td>
+                            <td th:text="${resLst.PHILHEALTH}"> </td>
+                            <td th:text="${resLst.TIN}"> </td>
+                            <td th:text="${resLst.SSS}"> </td>
+                            <td th:text="${resLst.DRIVERS_LICENSE}"> </td>
+                            <td th:text="${resLst.SPOUSE_NAME}"> </td>
+                            <td th:text="${resLst.SPOUSE_OCCUPATION}"> </td>
+                            <td th:text="${resLst.DEP1_NAME}"> </td>
+                            <td th:text="${resLst.DEP1_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP1_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP2_NAME}"> </td>
+                            <td th:text="${resLst.DEP2_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP2_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP3_NAME}"> </td>
+                            <td th:text="${resLst.DEP3_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP3_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP4_NAME}"> </td>
+                            <td th:text="${resLst.DEP4_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP4_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP5_NAME}"> </td>
+                            <td th:text="${resLst.DEP5_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP5_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.PREV_EMPA_NAME}"> </td>
+                            <td th:text="${resLst.PREV_EMPA_POSITION}"> </td>
+                            <td th:text="${resLst.PREV_EMPA_DATE}"> </td>
+                            <td th:text="${resLst.PREV_EMPB_NAME}"> </td>
+                            <td th:text="${resLst.PREV_EMPB_POSITION}"> </td>
+                            <td th:text="${resLst.PREV_EMPB_DATE}"> </td>
+                            <td th:text="${resLst.PREV_EMPC_NAME}"> </td>
+                            <td th:text="${resLst.PREV_EMPC_POSITION}"> </td>
+                            <td th:text="${resLst.PREV_EMPC_DATE}"> </td>
+                            <td th:text="${resLst.ATTENDANCE_MACHINE_ID}"> </td>
+                            <td th:text="${resLst.DATE_FIRED}"> </td>
+                            <td th:text="${resLst.SUPERVISOR_ID}"> </td>
+                            <td th:text="${resLst.PM_PARAM}"> </td>
+                            <td th:text="${resLst.NATURE_OF_WORK}"> </td>
+                            <td th:text="${resLst.SHIFT_ID}"> </td>
+                            <td th:text="${resLst.NATIONALITY}"> </td>
+                            <td th:text="${resLst.EMPLOYMENT_TYPE}"> </td>
+                            <td th:text="${resLst.ACCOUNT_TYPE}"> </td>
+                            <td th:text="${resLst.CREATED_BY}"> </td>
+                            <td th:text="${resLst.UPDATED_BY}"> </td>
+                            <td th:text="${resLst.UPDATE_DATE}"> </td>
+                            <td th:text="${resLst.AGENCY_ID}"> </td>
+                            <td th:text="${resLst.SUBCONTRACTOR_ID}"> </td>
+                            <td th:text="${resLst.DEPT_POSITION_ID}"> </td>
+                            <td th:text="${resLst.TL_ID}"> </td>
+                            <td th:text="${resLst.ACCOUNT_ID}"> </td>
+                            <td th:text="${resLst.ACCOUNT_NUMBER}"> </td>
+                            <td th:text="${resLst.ACCOUNT_NAME}"> </td>
+                            <td th:text="${resLst.PASSWORD_}"> </td>
+                            <td th:text="${resLst.QUESTION}"> </td>
+                            <td th:text="${resLst.ANSWER}"> </td>
+                            <td th:text="${resLst.RECOVER_TYPE}"> </td>
+                            <td th:text="${resLst.SEND_DESTINATION}"> </td>
+                            <td th:text="${resLst.FULL_NAME}"> </td>
+                            <td th:text="${resLst.SEX}"> </td>
+                            <td th:text="${resLst.NICK_NAME}"> </td>
+                            <td th:text="${resLst.FULL_SPELLING}"> </td>
+                            <td th:text="${resLst.SHORT_SPELLING}"> </td>
+                            <td th:text="${resLst.FULL_ENGLISH}"> </td>
+                            <td th:text="${resLst.DEGREE}"> </td>
+                            <td th:text="${resLst.DUTY}"> </td>
+                            <td th:text="${resLst.POSITION_}"> </td>
+                            <td th:text="${resLst.FUNCTION_}"> </td>
+                            <td th:text="${resLst.HEIGHT}"> </td>
+                            <td th:text="${resLst.WEIGHT}"> </td>
+                            <td th:text="${resLst.BLOOD_TYPE}"> </td>
+                            <td th:text="${resLst.BIRTHDAY}"> </td>
+                            <td th:text="${resLst.HOME_ADDRESS}"> </td>
+                            <td th:text="${resLst.HOME_ZIP}"> </td>
+                            <td th:text="${resLst.DWELL_ADDRESS}"> </td>
+                            <td th:text="${resLst.DWELL_ZIP}"> </td>
+                            <td th:text="${resLst.ID_CARD}"> </td>
+                            <td th:text="${resLst.MOBILE_PHONE_A}"> </td>
+                            <td th:text="${resLst.MOBILE_PHONE_B}"> </td>
+                            <td th:text="${resLst.HOME_PHONE}"> </td>
+                            <td th:text="${resLst.OFFICE_PHONE}"> </td>
+                            <td th:text="${resLst.DWELL_PHONE}"> </td>
+                            <td th:text="${resLst.EMAIL1}"> </td>
+                            <td th:text="${resLst.STATE}"> </td>
+                            <td th:text="${resLst.CREATE_DATE}"> </td>
+                            <td th:text="${resLst.REMARK}"> </td>
+                            <td th:text="${resLst.ORGANIZATION_ID}"> </td>
+                            <td th:text="${resLst.STAFF_POST}"> </td>
+                            <td th:text="${resLst.X_POSITION}"> </td>
+                            <td th:text="${resLst.Y_POSITION}"> </td>
+                            <td th:text="${resLst.SERVICE_LEVEL}"> </td>
+                            <td th:text="${resLst.GPS_DATE}"> </td>
+                            <td th:text="${resLst.START_METHOD}"> </td>
+                            <td th:text="${resLst.WORK_STARTTIME}"> </td>
+                            <td th:text="${resLst.WORK_ENDTIME}"> </td>
+                            <td th:text="${resLst.NOTITY_MODE}"> </td>
+                            <td th:text="${resLst.PHONEOS}"> </td>
+                            <td th:text="${resLst.PHONETYPE}"> </td>
+                            <td th:text="${resLst.EMAIL2}"> </td>
+                            <td th:text="${resLst.EPWD1}"> </td>
+                            <td th:text="${resLst.EPWD2}"> </td>
+                            <td th:text="${resLst.TEACHID}"> </td>
+                            <td th:text="${resLst.FIBERHOMEID}"> </td>
+                            <td th:text="${resLst.AVATAR}"> </td>
+                            <td th:text="${resLst.STATUS_}"> </td>
+                            <td th:text="${resLst.FIRST_NAME}"> </td>
+                            <td th:text="${resLst.MIDDLE_NAME}"> </td>
+                            <td th:text="${resLst.LAST_NAME}"> </td>
+                            <td th:text="${resLst.AGE}"> </td>
+                            <td th:text="${resLst.PLACE_OF_BIRTH}"> </td>
+                            <td th:text="${resLst.CITIZENSHIP}"> </td>
+                            <td th:text="${resLst.RELIGION}"> </td>
+                            <td th:text="${resLst.CIVIL_STATUS}"> </td>
+                            <td th:text="${resLst.ED_ATTAIN}"> </td>
+                            <td th:text="${resLst.COURSE}"> </td>
+                            <td th:text="${resLst.DATE_HIRED}"> </td>
+                            <td th:text="${resLst.AGENCY}"> </td>
+                            <td th:text="${resLst.AREA}"> </td>
+                            <td th:text="${resLst.PAG_IBIG}"> </td>
+                            <td th:text="${resLst.PHILHEALTH}"> </td>
+                            <td th:text="${resLst.TIN}"> </td>
+                            <td th:text="${resLst.SSS}"> </td>
+                            <td th:text="${resLst.DRIVERS_LICENSE}"> </td>
+                            <td th:text="${resLst.SPOUSE_NAME}"> </td>
+                            <td th:text="${resLst.SPOUSE_OCCUPATION}"> </td>
+                            <td th:text="${resLst.DEP1_NAME}"> </td>
+                            <td th:text="${resLst.DEP1_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP1_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP2_NAME}"> </td>
+                            <td th:text="${resLst.DEP2_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP2_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP3_NAME}"> </td>
+                            <td th:text="${resLst.DEP3_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP3_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP4_NAME}"> </td>
+                            <td th:text="${resLst.DEP4_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP4_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.DEP5_NAME}"> </td>
+                            <td th:text="${resLst.DEP5_RELATIONSHIP}"> </td>
+                            <td th:text="${resLst.DEP5_BIRTHDATE}"> </td>
+                            <td th:text="${resLst.PREV_EMPA_NAME}"> </td>
+                            <td th:text="${resLst.PREV_EMPA_POSITION}"> </td>
+                            <td th:text="${resLst.PREV_EMPA_DATE}"> </td>
+                            <td th:text="${resLst.PREV_EMPB_NAME}"> </td>
+                            <td th:text="${resLst.PREV_EMPB_POSITION}"> </td>
+                            <td th:text="${resLst.PREV_EMPB_DATE}"> </td>
+                            <td th:text="${resLst.PREV_EMPC_NAME}"> </td>
+                            <td th:text="${resLst.PREV_EMPC_POSITION}"> </td>
+                            <td th:text="${resLst.PREV_EMPC_DATE}"> </td>
+                            <td th:text="${resLst.ATTENDANCE_MACHINE_ID}"> </td>
+                            <td th:text="${resLst.DATE_FIRED}"> </td>
+                            <td th:text="${resLst.SUPERVISOR_ID}"> </td>
+                            <td th:text="${resLst.PM_PARAM}"> </td>
+                            <td th:text="${resLst.NATURE_OF_WORK}"> </td>
+                            <td th:text="${resLst.SHIFT_ID}"> </td>
+                            <td th:text="${resLst.NATIONALITY}"> </td>
+                            <td th:text="${resLst.EMPLOYMENT_TYPE}"> </td>
+                            <td th:text="${resLst.ACCOUNT_TYPE}"> </td>
+                            <td th:text="${resLst.CREATED_BY}"> </td>
+                            <td th:text="${resLst.UPDATED_BY}"> </td>
+                            <td th:text="${resLst.UPDATE_DATE}"> </td>
+                            <td th:text="${resLst.AGENCY_ID}"> </td>
+                            <td th:text="${resLst.SUBCONTRACTOR_ID}"> </td>
+                            <td th:text="${resLst.DEPT_POSITION_ID}"> </td>
+                            <td th:text="${resLst.TL_ID}"> </td>
+                    </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+
+    <div th:fragment="table_ROL">
+        Role List
+        <table class="table table-striped">
+            <thead>
+    
+                <tr>
+                    <div th:each="col : ${cols}">
+                        <th th:text="${col.COLUMN_NAME}">
+                        </th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr th:each="resLst : ${resLst}">
+                    <td th:text="${resLst.ROLE_ID}"></td>
+                    <td th:text="${resLst.NAME_}"></td>
+                    <td th:text="${resLst.POWER}"></td>
+                    <td th:text="${resLst.DESCRIBES}"></td>
+                    <td th:text="${resLst.STATE}"></td>
+                    <td th:text="${resLst.CREATE_DATE}"></td>
+                    <td th:text="${resLst.GRADE_ID}"></td>
+                    <td th:text="${resLst.NAME_CN}"></td>
+                    <td th:text="${resLst.PARENT_ID}"></td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
