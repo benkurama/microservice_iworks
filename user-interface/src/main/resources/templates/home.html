@@ -83,6 +83,11 @@
                 $("#contentBlock").load(url);
             });
 
+            $("#repairorderclick").click(function () {
+                var url = domain + "/repair-order/load";
+                $("#contentBlock").load(url);
+            });
+
         });
 
 
@@ -203,7 +208,7 @@
                         <ul>
                             <li>
                                 <div>
-                                    <a href="#" id="clickme">Repair Order</a>
+                                    <a href="#" id="repairorderclick">Repair Order</a>
                 
                                 </div>
                 

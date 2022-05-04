@@ -1,5 +1,6 @@
 package com.frontend.ui.controllers;
 
+import com.frontend.ui.services.RepairorderService;
 import com.frontend.ui.services.WorkorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class WorkorderdModController {
     @Autowired
     private WorkorderService workorderService;
 
+    @Autowired
+    private RepairorderService repairorderService;
+
     @RequestMapping("/work-order/load")
     public String workorderLoad(Model model){
 
@@ -28,5 +32,17 @@ public class WorkorderdModController {
         model.addAttribute("cols", columnList);
 
         return "/fragments/content :: table_WO";
+    }
+
+    @RequestMapping("/repair-order/load")
+    public String repairorderLoad(Model model){
+
+        List<Map> resLst = repairorderService.showall();
+        List<Map> columnList = repairorderService.showTableColumns();
+
+        model.addAttribute("resLst", resLst);
+        model.addAttribute("cols", columnList);
+
+        return "/fragments/content :: table_REPR";
     }
 }
