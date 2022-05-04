@@ -14,13 +14,13 @@ import java.util.Map;
  */
 @RestController
 //@CrossOrigin
-@RequestMapping("/workorder")
+@RequestMapping("/workorder/work")
 public class WorkorderController {
 
     @Autowired
     private WorkorderRepository workorderRepository;
 
-    @GetMapping("/showall")
+    @GetMapping("/showAll")
     public List<Map> showall(){
 
         List<Map> res = workorderRepository.selectAll();
