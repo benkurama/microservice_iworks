@@ -37,16 +37,8 @@ public class AccountController {
 
         List<Employee> empList =  employeeRepository.findAll();
 
-
         return empList;
     }
-
-    /*@GetMapping("/showAllAccounts")
-    public List<Account> showAllUser(){
-        List<Account> accountList = accountRepository.selectAll();
-
-        return accountList;
-    }*/
 
     @GetMapping("/showAll")
     public List<Map> showAllUser(){
