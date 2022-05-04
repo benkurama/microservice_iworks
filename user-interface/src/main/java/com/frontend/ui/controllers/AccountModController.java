@@ -1,5 +1,7 @@
 package com.frontend.ui.controllers;
 
+import com.frontend.ui.services.AccountService;
+import com.frontend.ui.services.OrganizationService;
 import com.frontend.ui.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +20,40 @@ public class AccountModController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private OrganizationService organizationService;
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping("/showAcc")
     @ResponseBody
     private String mainShow(){
 
         return "Account Module Controller";
+    }
+
+    @RequestMapping("/account/load")
+    public String accountLoad(Model model){
+
+        List<Map> resLst = accountService.showAllAccounts();
+        List<Map> columnList = accountService.showTableColumns();
+
+        model.addAttribute("resLst", resLst);
+        model.addAttribute("cols", columnList);
+
+        return "/fragments/content_accounts :: table_ACC";
+    }
+
+    @RequestMapping("/orgz/load")
+    public String OrgLoad(Model model){
+
+        List<Map> resLst = organizationService.showAllOrgs();
+        List<Map> columnList = organizationService.showTableColumns();
+
+        model.addAttribute("resLst", resLst);
+        model.addAttribute("cols", columnList);
+
+        return "/fragments/content_accounts :: table_ORG";
     }
 
     @RequestMapping("/role/load")

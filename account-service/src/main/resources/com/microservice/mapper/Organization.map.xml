@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microservice.account.service.repository.OrganizationRepository">
+
+    <select id="selectAll" resultType="Map">
+        select
+
+        ifnull( ORGANIZATION_ID,'' )		ORGANIZATION_ID,
+        ifnull( PARENT_ID,'' )		PARENT_ID,
+        ifnull( CODE_,'' )		CODE_,
+        ifnull( FULL_NAME,'' )		FULL_NAME,
+        ifnull( SHORT_NAME,'' )		SHORT_NAME,
+        ifnull( FULL_SPELLING,'' )		FULL_SPELLING,
+        ifnull( SHORT_SPELLING,'' )		SHORT_SPELLING,
+        ifnull( FULL_ENGLISH,'' )		FULL_ENGLISH,
+        ifnull( SHORT_ENGLISH,'' )		SHORT_ENGLISH,
+        ifnull( SORT,'' )		SORT,
+        ifnull( FUNCTION_,'' )		FUNCTION_,
+        ifnull( ADDRESS,'' )		ADDRESS,
+        ifnull( TELEPHONE,'' )		TELEPHONE,
+        ifnull( EMPLOYEE_COUNT,'' )		EMPLOYEE_COUNT,
+        ifnull( SQUARE,'' )		SQUARE,
+        ifnull( TYPE_,'' )		TYPE_,
+        ifnull( REMARK,'' )		REMARK,
+        ifnull( STATE,'' )		STATE,
+        ifnull( CREATE_DATE,'' )		CREATE_DATE,
+        ifnull( GRADE_ID,'' )		GRADE_ID,
+        ifnull( FULL_NAME_CN,'' )		FULL_NAME_CN,
+        ifnull( CO,'' )		CO,
+        ifnull( PLDTMAIL,'' )		PLDTMAIL,
+        ifnull( CENTRAL_ID,'' )		CENTRAL_ID,
+        ifnull( AREA_ID,'' )		AREA_ID,
+        ifnull( POSID,'' )		POSID,
+        ifnull( WBS_CODE,'' )		WBS_CODE,
+        ifnull( IPMS_AREA_ID,'' )		IPMS_AREA_ID,
+        ifnull( LONGITUDE,'' )		LONGITUDE,
+        ifnull( LATITUDE,'' )		LATITUDE
+
+         from organization_
+    </select>
+
+    <select id="selectTableColumns" resultType="Map">
+        SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE  TABLE_NAME = 'organization_'
+    </select>
+
+</mapper>

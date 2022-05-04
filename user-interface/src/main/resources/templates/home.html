@@ -78,6 +78,11 @@
                 $("#contentBlock").load(url);
             });
 
+            $("#orgzclick").click(function () {
+                var url = domain + "/orgz/load";
+                $("#contentBlock").load(url);
+            });
+
         });
 
 
@@ -165,7 +170,10 @@
                     </li>
                     <li class="list-group-item">
                         <ul>
-                            <li>Organization</li>
+                            <div>
+                                <a href="#" id="orgzclick">Organization</a>
+                    
+                            </div>
                         </ul>
                     </li>
                     <li class="list-group-item">

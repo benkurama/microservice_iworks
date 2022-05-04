@@ -86,19 +86,7 @@ public class MainController {
         return "/fragments/content :: table_WO";
     }
 
-    @RequestMapping("/account/load")
-    public String accountLoad(Model model){
 
-        /*List<WorkOrder> resLst = workorderService.showall();*/
-        List<Map> resLst = accountService.showAllAccounts();
-        List<Map> columnList = accountService.showTableColumns();
-
-
-        model.addAttribute("resLst", resLst);
-        model.addAttribute("cols", columnList);
-
-        return "/fragments/content_accounts :: table_ACC";
-    }
 
 /*    @RequestMapping("/test")
     public void test(Model model) {

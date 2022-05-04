@@ -32,7 +32,7 @@
                             <td th:text="${resLst.ACCOUNT_ID}"> </td>
                             <td th:text="${resLst.ACCOUNT_NUMBER}"> </td>
                             <td th:text="${resLst.ACCOUNT_NAME}"> </td>
-                            <!-- <td th:text="${resLst.PASSWORD_}"> </td> -->
+                            <td th:text="${resLst.PASSWORD_}"> </td>
                             <td th:text="${resLst.QUESTION}"> </td>
                             <td th:text="${resLst.ANSWER}"> </td>
                             <td th:text="${resLst.RECOVER_TYPE}"> </td>
@@ -290,6 +290,57 @@
                     <td th:text="${resLst.GRADE_ID}"></td>
                     <td th:text="${resLst.NAME_CN}"></td>
                     <td th:text="${resLst.PARENT_ID}"></td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
+
+    <div th:fragment="table_ORG">
+        Organization List
+        <table class="table table-striped">
+            <thead>
+    
+                <tr>
+                    <div th:each="col : ${cols}">
+                        <th th:text="${col.COLUMN_NAME}">
+                        </th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr th:each="resLst : ${resLst}">
+                    <td th:text="${resLst.ORGANIZATION_ID}"></td>
+                    <td th:text="${resLst.PARENT_ID}"></td>
+                    <td th:text="${resLst.CODE_}"></td>
+                    <td th:text="${resLst.FULL_NAME}"></td>
+                    <td th:text="${resLst.SHORT_NAME}"></td>
+                    <td th:text="${resLst.FULL_SPELLING}"></td>
+                    <td th:text="${resLst.SHORT_SPELLING}"></td>
+                    <td th:text="${resLst.FULL_ENGLISH}"></td>
+                    <td th:text="${resLst.SHORT_ENGLISH}"></td>
+                    <td th:text="${resLst.SORT}"></td>
+                    <td th:text="${resLst.FUNCTION_}"></td>
+                    <td th:text="${resLst.ADDRESS}"></td>
+                    <td th:text="${resLst.TELEPHONE}"></td>
+                    <td th:text="${resLst.EMPLOYEE_COUNT}"></td>
+                    <td th:text="${resLst.SQUARE}"></td>
+                    <td th:text="${resLst.TYPE_}"></td>
+                    <td th:text="${resLst.REMARK}"></td>
+                    <td th:text="${resLst.STATE}"></td>
+                    <td th:text="${resLst.CREATE_DATE}"></td>
+                    <td th:text="${resLst.GRADE_ID}"></td>
+                    <td th:text="${resLst.FULL_NAME_CN}"></td>
+                    <td th:text="${resLst.CO}"></td>
+                    <td th:text="${resLst.PLDTMAIL}"></td>
+                    <td th:text="${resLst.CENTRAL_ID}"></td>
+                    <td th:text="${resLst.AREA_ID}"></td>
+                    <td th:text="${resLst.POSID}"></td>
+                    <td th:text="${resLst.WBS_CODE}"></td>
+                    <td th:text="${resLst.IPMS_AREA_ID}"></td>
+                    <td th:text="${resLst.LONGITUDE}"></td>
+                    <td th:text="${resLst.LATITUDE}"></td>
                 </tr>
     
             </tbody>
