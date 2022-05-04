@@ -21,6 +21,7 @@
     <mappers>
         <mapper resource="com/microservice/mapper/Employee.map.xml"/>
         <mapper resource="com/microservice/mapper/Account.map.xml"/>
-        <mapper resource="com/microservice/mapper/role.map.xml"/>
+        <mapper resource="com/microservice/mapper/Role.map.xml"/>
+        <mapper resource="com/microservice/mapper/Organization.map.xml"/>
     </mappers>
 </configuration>
