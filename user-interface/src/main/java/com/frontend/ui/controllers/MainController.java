@@ -72,19 +72,7 @@ public class MainController {
         return "/fragments/content_home :: table";
     }
 
-    @RequestMapping("/work-order/load")
-    public String workorderLoad(Model model){
 
-        /*List<WorkOrder> resLst = workorderService.showall();*/
-        List<Map> resLst = workorderService.showall();
-        List<Map> columnList = workorderService.showTableColumns();
-
-
-        model.addAttribute("resLst", resLst);
-        model.addAttribute("cols", columnList);
-
-        return "/fragments/content :: table_WO";
-    }
 
 
 

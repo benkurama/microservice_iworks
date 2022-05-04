@@ -14,11 +14,11 @@ import java.util.Map;
 /**
  * Created by Default on 28/04/2022.
  */
-@FeignClient(name="workorder-service",url="http://localhost:8090", path="/workorder")
+@FeignClient(name="workorder-service",url="http://localhost:8090", path="/workorder/work")
 @Service
 public interface WorkorderService {
 
-    @GetMapping(value = "/showall")
+    @GetMapping(value = "/showAll")
     public List<Map> showall();
 
     @GetMapping(value = "/showTableColumns")
