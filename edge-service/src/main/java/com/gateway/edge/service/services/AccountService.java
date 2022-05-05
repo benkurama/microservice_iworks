@@ -26,7 +26,8 @@ public interface AccountService {
 
 }*/
 
-@FeignClient(name="account-service")
+@FeignClient(name="account-service", fallback = FallbackReturn.class)
+/*@FeignClient(name="account-service", fallbackFactory = FallbackReturnFactory.class)*/
 @Service
 public interface AccountService {
 
