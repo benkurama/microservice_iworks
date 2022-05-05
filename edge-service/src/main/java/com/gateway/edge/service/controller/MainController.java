@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -35,12 +36,21 @@ public class MainController {
         return "Main Gateway Sample";
     }
 
-    @GetMapping("/MainFeign")
-    public Optional<Account> MainShowFeign() {
-
-        Optional<Account> res = accountService.findByUsername("benkuramax");
-
+    @GetMapping("/MainFeinPost")
+    public Optional<Map> MainShowFeignPost() {
+        Optional<Map> res = accountService.findByUsername("fmacam");
         return res;
+    }
+
+    @GetMapping("/MainFeinGet")
+    public List<Map> MainShowFeignGet() {
+        List<Map> res = accountService.getStores();
+        return res;
+    }
+
+    @GetMapping("/MainPort")
+    public String getMainPort(){
+        return accountService.getMainPort();
     }
 
     @GetMapping("/MainShow")
@@ -48,7 +58,7 @@ public class MainController {
 
         //String str = accountService.showString();
 
-        List<ServiceInstance> instances=discoveryClient.getInstances("account-service");
+        List<ServiceInstance> instances= discoveryClient.getInstances("account-service");
         ServiceInstance serviceInstance=instances.get(0);
 
         String baseUrl=serviceInstance.getUri().toString();
@@ -56,7 +66,7 @@ public class MainController {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response=null;
         try{
-            response=restTemplate.exchange("http://localhost:1101/account/show",
+            response=restTemplate.exchange("http://localhost:1101/account/acct/show",
                     HttpMethod.GET, getHeaders(),String.class);
         }catch (Exception ex)
         {
