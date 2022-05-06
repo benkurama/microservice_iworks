@@ -1,10 +1,10 @@
-package com.microservice.account.service;
+package com.admin.springboot;
 
 /*import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AccountServiceApplicationTests {
+class SpringbootAdminApplicationTests {
 
 	@Test
 	void contextLoads() {
