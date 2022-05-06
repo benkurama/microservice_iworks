@@ -19,7 +19,6 @@
         <package name="com.microservice.account.service.repository"/>
     </typeAliases>
     <mappers>
-        <mapper resource="com/microservice/mapper/Employee.map.xml"/>
         <mapper resource="com/microservice/mapper/Account.map.xml"/>
         <mapper resource="com/microservice/mapper/Role.map.xml"/>
         <mapper resource="com/microservice/mapper/Organization.map.xml"/>

@@ -19,7 +19,6 @@
         <package name="com.microservice.workorder.service.repository"/>
     </typeAliases>
     <mappers>
-        <mapper resource="com/microservice/mapper/Employee.map.xml"/>
         <mapper resource="com/microservice/mapper/Account.map.xml"/>
         <mapper resource="com/microservice/mapper/Workorder.map.xml"/>
         <mapper resource="com/microservice/mapper/Repairorder.map.xml"/>
