@@ -17,26 +17,6 @@ import java.util.stream.Collectors;
  */
 @Configuration
 public class FeignConfiguration {
-/*    @Bean
-    public Contract feignContract() {
-        return new feign.Contract.Default();
-    }*/
-
-/*    @Bean
-    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-        return new BasicAuthRequestInterceptor("user", "password");
-    }*/
-
-/*    @Bean
-    public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> {
-            requestTemplate.header("Content-Type", "application/json");
-            requestTemplate.header("Accept", "application/json");
-            requestTemplate.header("header_1", "value_1");
-            requestTemplate.header("header_2", "value_2");
-            requestTemplate.header("header_3", "value_3");
-        };
-    }*/
     @Bean
     public HttpMessageConverters messageConverters(ObjectProvider<HttpMessageConverter<?>> converters){
         return new HttpMessageConverters(converters.orderedStream().collect(Collectors.toList()));
