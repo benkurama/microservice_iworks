@@ -99,6 +99,7 @@
 		<module>service-registry</module>
 		<module>edge-service</module>
 		<module>user-interface</module>
+		<module>react-ui</module>
 		<module>workorder-service</module>
 	</modules>
 
