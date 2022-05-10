@@ -1,6 +1,7 @@
 package com.microservice.workorder.service.controllers;
 
 import com.microservice.workorder.service.repository.WorkorderRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,14 @@ import java.util.Map;
 @RestController
 //@CrossOrigin
 @RequestMapping("/workorder/work")
+@Slf4j
 public class WorkorderController {
+
+    @GetMapping("/show")
+    public String showString(){
+        log.info("WORKORDER-SERVICE IS IN THE HOUSE");
+        return "WORKORDER-SERVICE IS IN THE HOUSE";
+    }
 
     @Autowired
     private WorkorderRepository workorderRepository;
