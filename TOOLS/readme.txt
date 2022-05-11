@@ -15,3 +15,5 @@ PORTS           |           DETAILS
 8050            :           SPRINGBOOT-ADMIN
 
 8080            :           REACT-UI
+
+9411            :           ZIPKIN SERVER

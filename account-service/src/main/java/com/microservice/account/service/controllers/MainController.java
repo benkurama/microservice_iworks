@@ -1,7 +1,11 @@
 package com.microservice.account.service.controllers;
 
 
+import com.microservice.account.service.configs.TestConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +24,17 @@ public class MainController {
     @Value("${server.port}")
     private String port;
 
+    @Autowired
+    TestConfiguration testConfiguration;
+
     @GetMapping("/showPort")
-
     private String showPort(){
-
         return port;
+    }
+
+    @GetMapping("/show")
+    private String show(){
+        return testConfiguration.getNamae();
     }
 
   /*@GetMapping("/showMain")
