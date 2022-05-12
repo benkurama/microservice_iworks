@@ -1,6 +1,7 @@
 package com.microservice.account.service.controllers;
 
 
+import com.microservice.account.service.configs.DataSourceConfig;
 import com.microservice.account.service.configs.TestConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,9 @@ public class MainController {
     @Autowired
     TestConfiguration testConfiguration;
 
+/*    @Autowired
+    DataSourceConfig dataSourceConfig;*/
+
     @GetMapping("/showPort")
     private String showPort(){
         return port;
@@ -34,7 +38,19 @@ public class MainController {
 
     @GetMapping("/show")
     private String show(){
-        return testConfiguration.getNamae();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(testConfiguration.getNamae());
+        stringBuilder.append(" and ");
+        stringBuilder.append(testConfiguration.getProfile());
+
+        return stringBuilder.toString();
+    }
+
+    @GetMapping("/reconfigure")
+    private String reconfigure(){
+        //dataSourceConfig.getDatasource();
+        return "successfully configure";
     }
 
   /*@GetMapping("/showMain")

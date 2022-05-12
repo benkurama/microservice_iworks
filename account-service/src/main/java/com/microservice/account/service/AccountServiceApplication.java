@@ -1,6 +1,8 @@
 package com.microservice.account.service;
 
 import brave.sampler.Sampler;
+import com.microservice.account.service.configs.DataSourceConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;

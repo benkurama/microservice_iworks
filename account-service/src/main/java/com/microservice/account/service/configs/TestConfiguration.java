@@ -11,7 +11,15 @@ public class TestConfiguration {
     @Value("${developer.name}")
     private String namae;
 
+    // not working with profiles
+    @Value("${profile.name}")
+    private String pname;
+
     public String getNamae(){
         return namae;
+    }
+
+    public String getProfile(){
+        return pname;
     }
 }
