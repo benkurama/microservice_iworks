@@ -1,5 +1,6 @@
 package com.frontend.ui.controllers;
 
+import com.frontend.ui.jwt.JWTUtils;
 import com.frontend.ui.model.Account;
 import com.frontend.ui.reqres.LoginRequest;
 import com.frontend.ui.reqres.LoginResponse;
@@ -36,6 +37,9 @@ public class APIController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    JWTUtils jwtUtils;
+
     @GetMapping("/show")
     @ResponseBody
     private String mainShow(){
@@ -55,12 +59,13 @@ public class APIController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
         User userDetails = (User) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new LoginResponse( userDetails.getUsername(), roles));
+        return ResponseEntity.ok(new LoginResponse( userDetails.getUsername(), roles, jwt));
     }
 
     @GetMapping("/login2")
@@ -70,6 +75,8 @@ public class APIController {
 
         Authentication authentication = authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtUtils.generateJwtToken(authentication);
 
 /*        if(true){
             return ResponseEntity.status(401).body(new LoginResponse( "error occuor", null));
@@ -81,7 +88,7 @@ public class APIController {
 
         //return ResponseEntity.ok(new LoginResponse( userDetails.getUsername(), roles));
         return ResponseEntity.ok()
-                .body(new LoginResponse( userDetails.getUsername(), roles));
+                .body(new LoginResponse( userDetails.getUsername(), roles, jwt));
     }
 
     @GetMapping("/account/showall")

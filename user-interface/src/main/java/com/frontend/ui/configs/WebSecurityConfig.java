@@ -1,5 +1,7 @@
 package com.frontend.ui.configs;
 
+import com.frontend.ui.jwt.JWTAuthEntryPoint;
+import com.frontend.ui.jwt.JWTTokenFilter;
 import com.frontend.ui.model.Account;
 import com.frontend.ui.services.AccountService;
 import com.frontend.ui.services.UserDetailsServiceImpl;
@@ -39,6 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private JWTAuthEntryPoint authEntryPoint;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -50,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 .and()
-                .cors()
+                .cors().and()
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(authEntryPoint)
                 .and()
                 /*.exceptionHandling().and().sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()*/
@@ -99,6 +105,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public JWTTokenFilter authenticationJwtTokenFilter() {
+        return new JWTTokenFilter();
     }
 
     // old codes , hard coded authentication user
