@@ -1,19 +1,16 @@
 import axios from "axios";
-const API_URL = "http://localhost:8070/api/";
+const API_URL = "http://localhost:8080/api/";
 const  login = (username,password) => {
-    return axios.post(API_URL + "login3", {
+    console.log(username);
+    return axios.post(API_URL + "sign-in", {
         username,
         password
-    })
-    .then((response)=> {
-            if (response.data.accessToken){
-                localStorage.setItem("user",JSON.stringify(response.data));
-            }
-            return response.data;
-    });
+    })  ;
 
 };
-
+const createJWTToken = (token) =>{
+    return 'Bearer ' + token
+};
 const logout   = () => {
     localStorage.removeItem("user");
 };
@@ -22,9 +19,29 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
 };
 
+const isUserLoggedIn = () => {
+    let user = localStorage.getItem("user");
+    return user !== null;
+
+};
+
+const setupAxiosInterceptors = (token) => {
+    axios.interceptors.request.use(
+        (config) => {
+            if (isUserLoggedIn()) {
+                config.headers.authorization = token
+            }
+            return config
+        }
+    )
+};
+
 const AuthService = {
     login,
     logout,
-    getCurrentUser
+    createJWTToken,
+    getCurrentUser,
+    isUserLoggedIn,
+    setupAxiosInterceptors
 };
 export default AuthService;

@@ -100,6 +100,7 @@
 		<module>edge-service</module>
 		<module>user-interface</module>
 		<module>react-ui</module>
+		<module>system-service</module>
 		<module>workorder-service</module>
 	</modules>
 
