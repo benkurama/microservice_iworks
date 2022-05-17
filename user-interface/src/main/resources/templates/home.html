@@ -88,6 +88,11 @@
                 $("#contentBlock").load(url);
             });
 
+            $("#installorderclick").click(function () {
+                var url = domain + "/install-order/load";
+                $("#contentBlock").load(url);
+            });
+
         });
 
 
@@ -191,7 +196,7 @@
                     </li>
 
                     <li class="list-group-item">Work Order</li>
-             
+             <!-- 
                     <li class="list-group-item">
                         <ul>
                             <li>
@@ -209,6 +214,18 @@
                             <li>
                                 <div>
                                     <a href="#" id="repairorderclick">Repair Order</a>
+                
+                                </div>
+                
+                            </li>
+                        </ul>
+                    </li>
+                -->     
+                    <li class="list-group-item">
+                        <ul>
+                            <li>
+                                <div>
+                                    <a href="#" id="installorderclick">Install Order</a>
                 
                                 </div>
                 

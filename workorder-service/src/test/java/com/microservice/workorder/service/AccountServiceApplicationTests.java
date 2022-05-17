@@ -1,4 +1,4 @@
-package com.microservice.account.service;
+package com.microservice.workorder.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microservice.workorder.service.repository.CompanyFacility">
+
+    <select id="selectAll" resultType="Map">
+        select
+       *
+         from company_facility
+    </select>
+
+    <select id="selectTableColumns" resultType="Map">
+        SELECT COLUMN_NAME
+          FROM INFORMATION_SCHEMA.COLUMNS
+          WHERE  TABLE_NAME = 'company_facility'
+    </select>
+
+</mapper>
