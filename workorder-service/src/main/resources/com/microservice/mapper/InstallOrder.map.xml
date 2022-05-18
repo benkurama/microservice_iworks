@@ -126,4 +126,13 @@
           WHERE  TABLE_NAME = 'install_order_header'
     </select>
 
+    <select id="selectGraph001" resultType="Map">
+        select main.dateStr, count(1) count from
+        (
+            select date_format(created, "%M-%Y") dateStr, created from install_order_header
+        ) main
+        group by dateStr
+        order by Month(created)
+    </select>
+
 </mapper>

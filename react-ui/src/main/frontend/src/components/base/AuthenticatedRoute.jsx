@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Route, Navigate  } from 'react-router-dom'
-import AuthService from "../services/AuthService";
-import Home from "./base/Home";
+import AuthService from "../../services/AuthService";
+import Home from "../Home";
 
 const AuthenticatedRoute = (element: Component, loggedIn, path, ...rest) => {
    return (

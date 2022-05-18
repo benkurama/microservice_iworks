@@ -2,7 +2,7 @@ import React from "react";
 import {Navigate, Route, Routes} from "react-router";
 import Profile from "../Profile";
 import Login from "../Login";
-import Home from "./Home";
+import Home from "../Home";
 import PublicRoutes from "./PublicRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Content from "./Content";

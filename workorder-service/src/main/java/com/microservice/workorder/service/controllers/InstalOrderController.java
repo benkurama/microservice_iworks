@@ -30,4 +30,9 @@ public class InstalOrderController {
     public List<Map> showTableColumns(){
         return installOrderRepository.selectTableColumns();
     }
+
+    @GetMapping("/showGraph001")
+    public List<Map> showGraph001(){
+        return installOrderRepository.selectGraph001();
+    }
 }

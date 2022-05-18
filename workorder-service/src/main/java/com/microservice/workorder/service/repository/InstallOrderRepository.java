@@ -11,4 +11,6 @@ import java.util.Map;
 public interface InstallOrderRepository {
     List<Map> selectAll();
     List<Map> selectTableColumns();
+
+    List<Map> selectGraph001();
 }

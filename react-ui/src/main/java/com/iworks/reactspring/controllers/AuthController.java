@@ -1,10 +1,12 @@
 package com.iworks.reactspring.controllers;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.iworks.reactspring.exceptions.AuthenticationException;
+import com.iworks.reactspring.models.GraphsModel;
+import com.iworks.reactspring.services.AccountService;
+import com.iworks.reactspring.services.InstallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,9 @@ public class AuthController {
     private PasswordEncoder encoder;
     @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
+    InstallService installService;
 
     @PostMapping(value = "/sign-in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {
@@ -61,5 +66,7 @@ public class AuthController {
     public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
+
+
 
 }
