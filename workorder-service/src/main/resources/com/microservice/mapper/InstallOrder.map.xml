@@ -135,4 +135,11 @@
         order by Month(created)
     </select>
 
+    <select id="selectGraph002" resultType="Map">
+        select subArea, date_format(created, "%M-%Y") dateStr, count(1)  count from install_order_header
+        where subArea is not null and subArea != ''
+        group by subArea, date_format(created, "%M-%Y")
+        order by subArea, Month(created)
+    </select>
+
 </mapper>

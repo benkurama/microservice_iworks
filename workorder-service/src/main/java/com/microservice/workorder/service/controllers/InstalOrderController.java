@@ -35,4 +35,9 @@ public class InstalOrderController {
     public List<Map> showGraph001(){
         return installOrderRepository.selectGraph001();
     }
+
+    @GetMapping("/showGraph002")
+    public List<Map> showGraph002(){
+        return installOrderRepository.selectGraph002();
+    }
 }

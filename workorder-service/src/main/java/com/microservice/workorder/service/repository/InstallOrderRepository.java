@@ -13,4 +13,6 @@ public interface InstallOrderRepository {
     List<Map> selectTableColumns();
 
     List<Map> selectGraph001();
+
+    List<Map> selectGraph002();
 }

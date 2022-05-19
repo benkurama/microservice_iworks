@@ -7,6 +7,8 @@ export default function LineGraph() {
 
     const [content, setContent] = useState("");
 
+    const [lineGraph, setLineGraph] = useState("");
+
     useEffect(() => {
         
         BaseService.HttpGet("graph/show").then(
@@ -25,7 +27,23 @@ export default function LineGraph() {
                 setContent(_content);
             }
         );
-
+        // --------------------
+        BaseService.HttpGet("graph/show002").then(
+            (response) => {
+                //console.log('response');
+                //console.log(JSON.stringify(response.data));
+                setLineGraph(response.data);
+            },
+            (error) => {
+                const _content =
+                    (error.response && error.response.data) ||
+                    error.message ||
+                    error.toString();
+                    console.log('error');
+                    console.log(_content);
+                    setLineGraph(_content);
+            }
+        );
         
 
         //console.log(JSON.stringify(chartData));
@@ -39,12 +57,6 @@ export default function LineGraph() {
                 data: [65, 59, 80, 81, 56, 55, 40],
                 fill: false,
                 borderColor: '#4bc0c0'
-            },
-            {
-                label: 'Second Dataset',
-                data: [28, 48, 40, 19, 86, 27, 90],
-                fill: false,
-                borderColor: '#565656'
             }
         ]
     };
@@ -53,7 +65,7 @@ export default function LineGraph() {
         plugins: {
             title: {
                 display: true,
-                text: 'Line Graph',
+                text: 'Install Order Line Graph',
                 font: {
                     size: 16
                 }
@@ -131,7 +143,9 @@ export default function LineGraph() {
     return(
         <div>
 
+            <Chart type="line" data={lineGraph} options={options} height="130" />
 
+            <br></br>
             <div className="row">
                 <div class="col-md-6"  >
 
@@ -145,7 +159,7 @@ export default function LineGraph() {
             </div>
 
 
-            <Chart type="line" data={data} options={options} height="100" />
+            
         </div>
     )
 }

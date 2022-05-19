@@ -67,6 +67,73 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
 
+    @GetMapping("/show")
+    public List<Map> showGrap002(){
 
+        List<Map> res = installService.showGraph002();
+
+        //>>>> Get all months by data list and save to dateStr array
+            Map<String, Long> mapRegsGroup = res.stream()
+                    .collect(Collectors.groupingBy(map -> map.get("subArea").toString(),
+                            Collectors.counting() ));
+
+            String selectedArea = "";
+            int selectedCount = 0;
+
+            for (Map.Entry<String, Long> entry : mapRegsGroup.entrySet()) {
+                String k = entry.getKey();
+                int v = Integer.parseInt(entry.getValue()+"");
+
+                if(selectedCount < v){
+                    selectedCount = v;
+                    selectedArea = k;
+                }
+            }
+
+            final String selArea = selectedArea;
+            //--
+            List<Map> mapFillFilter = res.stream().filter(map -> map.get("subArea").toString().equals(selArea))
+                    .collect(Collectors.toList());
+            //--
+            int count = mapFillFilter.size();
+            String[] dateStr = new String[count];
+            int i = 0;
+
+            for (Map entry : mapFillFilter) {
+                dateStr[i] = entry.get("dateStr").toString();
+                i++;
+            }
+        //<<<<
+        //-------------------------
+        List<Map> mapList = new ArrayList<>();
+
+        for (Map.Entry<String, Long> entry : mapRegsGroup.entrySet()) {
+            String k = entry.getKey();
+
+            List<Map> mapFill001 = res.stream().filter(map -> map.get("subArea").toString().equals(k))
+                    .collect(Collectors.toList());
+
+            int[] data = new int[count];
+
+            for(int ii=0; ii < count; ii++){
+                String date = dateStr[ii];
+                List<Map> monthData =  mapFill001.stream().filter(map -> map.get("dateStr").toString().equals(date))
+                        .collect(Collectors.toList());
+
+                if(monthData.size() != 0){
+                    data[ii] = Integer.parseInt( monthData.get(0).get("count").toString() );
+                } else {
+                    data[ii] = 0;
+                }
+            }
+
+            Map map = new HashMap();
+            //
+            map.put(k,data);
+            mapList.add(map);
+        }
+
+        return mapList;
+    }
 
 }

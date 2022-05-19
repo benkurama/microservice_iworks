@@ -20,4 +20,7 @@ public interface InstallService {
 
     @GetMapping("/showGraph001")
     public List<Map> showGraph001();
+
+    @GetMapping("/showGraph002")
+    public List<Map> showGraph002();
 }
