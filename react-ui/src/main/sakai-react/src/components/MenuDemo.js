@@ -10,7 +10,7 @@ import { Button } from 'primereact/button';
 import { ContextMenu } from 'primereact/contextmenu';
 import { MegaMenu } from 'primereact/megamenu';
 import { PanelMenu } from 'primereact/panelmenu';
-import { Route, useHistory, useLocation } from 'react-router-dom';
+import { Route, Navigate, useLocation } from 'react-router-dom';
 import { PersonalDemo } from '../components/menu/PersonalDemo';
 import { ConfirmationDemo } from '../components/menu/ConfirmationDemo';
 import { PaymentDemo } from '../components/menu/PaymentDemo';
@@ -21,7 +21,7 @@ const MenuDemo = () => {
 
     const menu = useRef(null);
     const contextMenu = useRef(null);
-    const history = useHistory();
+    const navigate = Navigate();
     const location = useLocation();
 
     const checkActiveIndex = useCallback(() => {
@@ -138,10 +138,10 @@ const MenuDemo = () => {
     ];
 
     const wizardItems = [
-        { label: 'Personal', command: () => history.push('/menu') },
-        { label: 'Seat', command: () => history.push('/menu/seat') },
-        { label: 'Payment', command: () => history.push('/menu/payment') },
-        { label: 'Confirmation', command: () => history.push('/menu/confirmation') }
+        { label: 'Personal', command: () => navigate('/menu') },
+        { label: 'Seat', command: () => navigate('/menu/seat') },
+        { label: 'Payment', command: () => navigate('/menu/payment') },
+        { label: 'Confirmation', command: () => navigate('/menu/confirmation') }
     ];
 
     const tieredMenuItems = [

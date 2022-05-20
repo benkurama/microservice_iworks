@@ -1,10 +1,9 @@
 import React, {useState, useRef, Component} from "react";
-import { useNavigate, useHistory} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../service/AuthService";
-
 
 const required = (value) => {
     if (!value) {
@@ -17,7 +16,7 @@ const required = (value) => {
 };
 
 const Login = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const form = useRef();
     const checkBtn = useRef();
     const [username, setUsername] = useState("");
@@ -45,8 +44,7 @@ const Login = () => {
                     if (response.data.token){
                         localStorage.setItem("user",JSON.stringify(response.data));
                         AuthService.setupAxiosInterceptors(AuthService.createJWTToken(response.data.token));
-                        //navigate("/home");
-                        history.push("/home");
+                        navigate("/");
                     }
             //return response.data;
             }).catch((error) => {
@@ -58,7 +56,7 @@ const Login = () => {
                     error.toString();
                 setLoading(false);
                 setMessage(resMessage);
-            }); 
+            });
         /*} else {
             setLoading(false);
         }*/

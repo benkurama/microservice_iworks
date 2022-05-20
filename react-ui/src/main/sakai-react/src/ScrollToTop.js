@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { useLocation, withRouter } from 'react-router-dom';
+
+import {
+    useLocation,
+    useNavigate,
+    useParams
+  } from "react-router-dom";
 
 const ScrollToTop = (props) => {
 
@@ -12,4 +17,20 @@ const ScrollToTop = (props) => {
     return props.children;
 }
 
-export default withRouter(ScrollToTop);
+export default WithRouter(ScrollToTop);
+
+function WithRouter(Component) {
+    function ComponentWithRouterProp(props) {
+      let location = useLocation();
+      let navigate = useNavigate();
+      let params = useParams();
+      return (
+        <Component
+          {...props}
+          router={{ location, navigate, params }}
+        />
+      );
+    }
+  
+    return ComponentWithRouterProp;
+  }
