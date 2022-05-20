@@ -17,7 +17,7 @@
         <node.version>v18.0.0</node.version>
         <npm.version>v8.6.0</npm.version>
         <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
-        <frontend-src-dir>${project.basedir}/src/main/frontend</frontend-src-dir>
+        <frontend-src-dir>${project.basedir}/src/main/sakai-react</frontend-src-dir>
     </properties>
     <dependencies>
         <dependency>
@@ -114,7 +114,7 @@
                         <configuration>
                             <target>
                                 <copy todir="${project.build.directory}/classes/public">
-                                    <fileset dir="${project.basedir}/src/main/frontend/build"/>
+                                    <fileset dir="${project.basedir}/src/main/sakai-react/build"/>
                                 </copy>
                             </target>
                         </configuration>

@@ -44,7 +44,7 @@ const Login = () => {
                     if (response.data.token){
                         localStorage.setItem("user",JSON.stringify(response.data));
                         AuthService.setupAxiosInterceptors(AuthService.createJWTToken(response.data.token));
-                        navigate("/home");
+                        navigate("/");
                     }
             //return response.data;
             }).catch((error) => {

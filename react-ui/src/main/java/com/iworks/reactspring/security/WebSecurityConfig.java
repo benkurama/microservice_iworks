@@ -63,33 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers("/api/**").permitAll()
-                .antMatchers("/api/sign-in").permitAll()
-                .antMatchers("/api/home").permitAll()
-                .antMatchers("/resource/resMenu").permitAll()
-                .antMatchers("/",
-                "/favicon.ico",
-                "/**/*.png",
-                "/**/*.gif",
-                "/**/*.svg",
-                "/**/*.jpg",
-                "/**/*.html",
-                "/**/*.css",
-                "/**/*.js",
-                 "/**/*.jsx",
-                 "/**/*.map").permitAll()
-                .anyRequest().authenticated();
-
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-        http
-                .headers()
-                .frameOptions().sameOrigin()  //H2 Console Needs this setting
-                .cacheControl(); //disable caching
+        http.authorizeRequests().antMatchers("/").permitAll();
     }
 
     @Override
