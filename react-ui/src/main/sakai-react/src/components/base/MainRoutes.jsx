@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router";
 
-import Login from "../../pages/Login";
+import Login from "../../pages/Login2";
 import Home from "../../pages/Home";
 import PublicRoutes from "./PublicRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
