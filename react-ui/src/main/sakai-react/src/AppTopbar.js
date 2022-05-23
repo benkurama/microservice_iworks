@@ -1,14 +1,28 @@
-import React  from 'react';
+
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import React, {useEffect, useState} from "react";
 
 export const AppTopbar = (props) => {
+
+    const [currentUser, setCurrentUser] = useState("user");
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+            setCurrentUser(user)
+            console.log(user.username);
+        }else{
+            console.log('null user');
+        }
+        
+    }, []);
 
     return (
         <div className="layout-topbar">
             <Link to="/" className="layout-topbar-logo">
                 <img src={props.layoutColorMode === 'light' ? 'assets/layout/images/logo-dark.svg' : 'assets/layout/images/logo-white.svg'} alt="logo"/>
-                <span>SAKAI</span>
+                <span>JD MICROSERVICE</span>
             </Link>
 
             <button type="button" className="p-link  layout-menu-button layout-topbar-button" onClick={props.onToggleMenuClick}>
@@ -20,6 +34,13 @@ export const AppTopbar = (props) => {
             </button>
 
                 <ul className={classNames("layout-topbar-menu lg:flex origin-top", {'layout-topbar-menu-mobile-active': props.mobileTopbarMenuActive })}>
+                    
+                     <li>
+                        <button className="p-link layout-topbar-button" >
+                                {currentUser.username}
+                        </button>
+                    </li>
+                    
                     <li>
                         <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
                             <i className="pi pi-calendar"/>
@@ -37,6 +58,15 @@ export const AppTopbar = (props) => {
                             <i className="pi pi-user"/>
                             <span>Profile</span>
                         </button>
+                    </li>
+                    <li>
+                        <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarLOGOUT}>
+                            <i className="pi pi-sign-out"/>
+                            <span>Logout</span>
+                        </button>
+                    </li>
+                    <li>
+                        
                     </li>
                 </ul>
         </div>

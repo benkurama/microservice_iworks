@@ -6,7 +6,7 @@ import EventBus from "../../common/EventBus";
 
 
 export default function Header() {
-    const [currentUser, setCurrentUser] = useState(undefined);
+    const [currentUser, setCurrentUser] = useState("user");
     const navigation = useNavigate();
     const location = useLocation();
     //const dispatch = useDispatch();

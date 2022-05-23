@@ -44,6 +44,10 @@ import '../assets/demo/flags/flags.css';
 import '../assets/demo/Demos.scss';
 import '../assets/layout/layout.scss';
 import '../App.scss';
+//import AuthService from '../service/AuthService';
+//import EventBus from '../common/EventBus';
+
+import {useNavigate} from "react-router";
 
 const Home = () => {
     const [layoutMode, setLayoutMode] = useState('static');
@@ -283,12 +287,27 @@ const Home = () => {
         'layout-theme-light': layoutColorMode === 'light'
     });
 
+// benkuramax section
+
+    const navigation = useNavigate();
+    const onMobileSubTopbarLOGOUT = (event) => {
+        
+        event.preventDefault();
+        localStorage.removeItem("user");
+        navigation("/login");
+
+        //alert('logout');
+    }
+
     return (
         <div className={wrapperClass} onClick={onWrapperClick}>
             <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
 
             <AppTopbar onToggleMenuClick={onToggleMenuClick} layoutColorMode={layoutColorMode}
-                mobileTopbarMenuActive={mobileTopbarMenuActive} onMobileTopbarMenuClick={onMobileTopbarMenuClick} onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick} />
+                mobileTopbarMenuActive={mobileTopbarMenuActive} onMobileTopbarMenuClick={onMobileTopbarMenuClick} onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick} 
+                onMobileSubTopbarLOGOUT={onMobileSubTopbarLOGOUT}
+               
+                />
 
             <div className="layout-sidebar" onClick={onSidebarClick}>
                 <AppMenu model={menu} onMenuItemClick={onMenuItemClick} layoutColorMode={layoutColorMode} />

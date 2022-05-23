@@ -1,7 +1,7 @@
 import React from "react"
 
 import {Navigate, Outlet} from "react-router-dom"
-import AuthService from "../../services/AuthService";
+import AuthService from "../../service/AuthService";
 
 const useAuth = () => {
     //get item from localstorage
