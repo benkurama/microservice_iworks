@@ -5,16 +5,17 @@ import Login from "../../pages/Login";
 import Home from "../../pages/Home";
 import PublicRoutes from "./PublicRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
-import Content from "./Content";
+//import Content from "./Content";
 
 const MainRoutes = () => (
     <Routes>
 
         <Route path="/" element={<ProtectedRoutes />}>
-            <Route path="/" element={<Content/>}>
+            
                 <Route path="/" element={<Navigate replace to="home" />} />
-                <Route path="home" element={<Home/>}/>
-            </Route> 
+                <Route path="home/*" element={<Home/>} />
+             
+            
         </Route>
 
 

@@ -27,7 +27,7 @@ type ProtectedRouteType = {
 
 const ProtectedRoutes = (props: ProtectedRouteType) => {
     const {auth, role} = useAuth();
-
+console.log(role);
     //if the role required is there or not
     if (props.roleRequired) {
         return auth ? (
