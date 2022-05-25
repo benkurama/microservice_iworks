@@ -15,4 +15,10 @@ public interface InstallOrderRepository {
     List<Map> selectGraph001();
 
     List<Map> selectGraph002();
+
+    List<Map> selectReceiptGraph001();
+
+    List<Map> selectReceiptGraph002();
+
+    List<Map> selectTransHistoryGraph001();
 }

@@ -142,4 +142,21 @@
         order by subArea, Month(created)
     </select>
 
+    <select id="selectReceiptGraph001" resultType="Map">
+        select  date_format(created, "%M-%Y") dateStr, count(1)  count from receipt_header
+            group by date_format(created, "%M-%Y")
+            order by Month(created)
+    </select>
+
+    <select id="selectReceiptGraph002" resultType="Map">
+        select  internalInstructionType, date_format(created, "%M-%Y") dateStr, count(1)  count from receipt_header
+            group by internalInstructionType, date_format(created, "%M-%Y")
+            order by internalInstructionType, Month(created)
+    </select>
+
+    <select id="selectTransHistoryGraph001" resultType="Map">
+        select  processType, count(1) count from transaction_history
+        group by  processType
+    </select>
+
 </mapper>

@@ -40,4 +40,19 @@ public class InstalOrderController {
     public List<Map> showGraph002(){
         return installOrderRepository.selectGraph002();
     }
+
+    @GetMapping("/showReceiptGraph001")
+    public List<Map> showReceiptGraph001(){
+        return installOrderRepository.selectReceiptGraph001();
+    }
+
+    @GetMapping("/showReceiptGraph002")
+    public List<Map> showReceiptGraph002(){
+        return installOrderRepository.selectReceiptGraph002();
+    }
+
+    @GetMapping("/selectTransHistoryGraph001")
+    public List<Map> selectTransHistoryGraph001(){
+        return installOrderRepository.selectTransHistoryGraph001();
+    }
 }
