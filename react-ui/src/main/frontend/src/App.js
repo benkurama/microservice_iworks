@@ -1,12 +1,15 @@
-import logo from './logo.svg';
+
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/Login";
-import React, { useState, useEffect } from "react";
-import {Routes, Route, Link} from "react-router-dom";
+
+import React, {useState, useEffect} from "react";
+
 import AuthService from "./services/AuthService";
-import Home from "./components/base/Home";
-import Profile from "./components/Profile";
+
+import EventBus from "./common/EventBus";
+
+import MainRoutes from "./components/base/MainRoutes";
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -16,63 +19,21 @@ function App() {
     if (user) {
       setCurrentUser(user);
     }
+
+    window.addEventListener('storage', AuthService.getCurrentUser);
+    return () => {
+      EventBus.remove("logout");
+      window.removeEventListener('storage', AuthService.getCurrentUser)
+    };
   }, []);
 
-  const logOut = () => {
-    AuthService.logout();
-  };
+
   return (
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-            Fiberhome
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
-            {currentUser && (
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
-                  </Link>
-                </li>
-            )}
-          </div>
-          {currentUser ? (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={logOut}>
-                    LogOut
-                  </a>
-                </li>
-              </div>
-          ) : (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
-                    Login
-                  </Link>
-                </li>
-              </div>
-          )}
-        </nav>
-        <div className="container mt-3">
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/home" element={<Home/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/profile" element={<Profile/>} />
-          </Routes>
-        </div>
-      </div>
+      <div className="app">
+            
+            <MainRoutes/>
+
+    </div>
   );
 };
 export default App;

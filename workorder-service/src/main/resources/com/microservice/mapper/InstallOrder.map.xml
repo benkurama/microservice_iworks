@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microservice.workorder.service.repository.InstallOrderRepository">
+
+    <select id="selectAll" resultType="Map">
+        select
+            ifnull( id, '' )	id,
+            ifnull( code, '' )	code,
+            ifnull( orderType, '' )	orderType,
+            ifnull( facilityCode, '' )	facilityCode,
+            ifnull( companyCode, '' )	companyCode,
+            ifnull( clientCode, '' )	clientCode,
+            ifnull( status, '' )	status,
+            ifnull( refOrderCode, '' )	refOrderCode,
+            ifnull( refOrderId, '' )	refOrderId,
+            ifnull( internalOrderType, '' )	internalOrderType,
+            ifnull( bizChannel, '' )	bizChannel,
+            ifnull( vendorCode, '' )	vendorCode,
+            ifnull( vendorName, '' )	vendorName,
+            ifnull( shipToAttentionTo, '' )	shipToAttentionTo,
+            ifnull( shipToCountryCode, '' )	shipToCountryCode,
+            ifnull( shipToCountry, '' )	shipToCountry,
+            ifnull( shipToStateCode, '' )	shipToStateCode,
+            ifnull( shipToState, '' )	shipToState,
+            ifnull( shipToCityCode, '' )	shipToCityCode,
+            ifnull( shipToCity, '' )	shipToCity,
+            ifnull( shipToDistrictCode, '' )	shipToDistrictCode,
+            ifnull( shipToDistrict, '' )	shipToDistrict,
+            ifnull( shipToStreetCode, '' )	shipToStreetCode,
+            ifnull( shipToStreet, '' )	shipToStreet,
+            ifnull( shipToAddress, '' )	shipToAddress,
+            ifnull( shipToPostalCode, '' )	shipToPostalCode,
+            ifnull( shipToPhone, '' )	shipToPhone,
+            ifnull( shipToMobile, '' )	shipToMobile,
+            ifnull( shipToFax, '' )	shipToFax,
+            ifnull( shipToEmail, '' )	shipToEmail,
+            ifnull( shipToLatitude, '' )	shipToLatitude,
+            ifnull( shipToLongitude, '' )	shipToLongitude,
+            ifnull( totalAmount, '' )	totalAmount,
+            ifnull( totalLines, '' )	totalLines,
+            ifnull( totalQty, '' )	totalQty,
+            ifnull( totalWeight, '' )	totalWeight,
+            ifnull( totalVolume, '' )	totalVolume,
+            ifnull( totalVolumeWeight, '' )	totalVolumeWeight,
+            ifnull( totalFulfillQty, '' )	totalFulfillQty,
+            ifnull( totalFulfillAmount, '' )	totalFulfillAmount,
+            ifnull( totalFulfillWeight, '' )	totalFulfillWeight,
+            ifnull( totalFulfillVolume, '' )	totalFulfillVolume,
+            ifnull( weightUM, '' )	weightUM,
+            ifnull( volumeUM, '' )	volumeUM,
+            ifnull( sourcePlatformCode, '' )	sourcePlatformCode,
+            ifnull( sourceOrderId, '' )	sourceOrderId,
+            ifnull( sourceOrderCode, '' )	sourceOrderCode,
+            ifnull( auditBy, '' )	auditBy,
+            ifnull( auditAt, '' )	auditAt,
+            ifnull( errorCode, '' )	errorCode,
+            ifnull( errorDesc, '' )	errorDesc,
+            ifnull( holdCode, '' )	holdCode,
+            ifnull( holdUser, '' )	holdUser,
+            ifnull( holdAt, '' )	holdAt,
+            ifnull( processStamp, '' )	processStamp,
+            ifnull( created, '' )	created,
+            ifnull( createdBy, '' )	createdBy,
+            ifnull( lastUpdated, '' )	lastUpdated,
+            ifnull( lastUpdatedBy, '' )	lastUpdatedBy,
+            ifnull( version, '' )	version,
+            ifnull( userDef1, '' )	userDef1,
+            ifnull( userDef2, '' )	userDef2,
+            ifnull( userDef3, '' )	userDef3,
+            ifnull( userDef4, '' )	userDef4,
+            ifnull( userDef5, '' )	userDef5,
+            ifnull( userDef6, '' )	userDef6,
+            ifnull( userDef7, '' )	userDef7,
+            ifnull( userDef8, '' )	userDef8,
+            ifnull( carrierCode, '' )	carrierCode,
+            ifnull( carrierServiceCode, '' )	carrierServiceCode,
+            ifnull( rate, '' )	rate,
+            ifnull( projectId, '' )	projectId,
+            ifnull( area, '' )	area,
+            ifnull( subArea, '' )	subArea,
+            ifnull( sourceCreated, '' )	sourceCreated,
+            ifnull( sourceStatus, '' )	sourceStatus,
+            ifnull( neType, '' )	neType,
+            ifnull( seriviceType, '' )	seriviceType,
+            ifnull( soType, '' )	soType,
+            ifnull( priority, '' )	priority,
+            ifnull( agreedDate, '' )	agreedDate,
+            ifnull( groupType, '' )	groupType,
+            ifnull( customerType, '' )	customerType,
+            ifnull( exchange, '' )	exchange,
+            ifnull( operator, '' )	operator,
+            ifnull( planType, '' )	planType,
+            ifnull( installer, '' )	installer,
+            ifnull( reason, '' )	reason,
+            ifnull( workHours, '' )	workHours,
+            ifnull( installStatus, '' )	installStatus,
+            ifnull( isJoint, '' )	isJoint,
+            ifnull( appointmentBy, '' )	appointmentBy,
+            ifnull( appointmentAt, '' )	appointmentAt,
+            ifnull( pwType, '' )	pwType,
+            ifnull( errorType, '' )	errorType,
+            ifnull( serviceId, '' )	serviceId,
+            ifnull( assignTel, '' )	assignTel,
+            ifnull( plan, '' )	plan,
+            ifnull( cleanStatus, '' )	cleanStatus,
+            ifnull( serviceStaff, '' )	serviceStaff,
+            ifnull( applyDate, '' )	applyDate,
+            ifnull( callResult, '' )	callResult,
+            ifnull( callCount, '' )	callCount,
+            ifnull( nextCallTime, '' )	nextCallTime,
+            ifnull( cancelTime, '' )	cancelTime,
+            ifnull( landmark, '' )	landmark,
+            ifnull( permitType, '' )	permitType,
+            ifnull( remark, '' )	remark,
+            ifnull( periodType, '' )	periodType,
+            ifnull( secondAuditStatus, '' )	secondAuditStatus
+         from install_order_header
+    </select>
+
+    <select id="selectTableColumns" resultType="Map">
+        SELECT COLUMN_NAME
+          FROM INFORMATION_SCHEMA.COLUMNS
+          WHERE  TABLE_NAME = 'install_order_header'
+    </select>
+
+    <select id="selectGraph001" resultType="Map">
+        select main.dateStr, count(1) count from
+        (
+            select date_format(created, "%M-%Y") dateStr, created from install_order_header
+        ) main
+        group by dateStr
+        order by Month(created)
+    </select>
+
+    <select id="selectGraph002" resultType="Map">
+        select subArea, date_format(created, "%M-%Y") dateStr, count(1)  count from install_order_header
+        where subArea is not null and subArea != ''
+        group by subArea, date_format(created, "%M-%Y")
+        order by subArea, Month(created)
+    </select>
+
+</mapper>

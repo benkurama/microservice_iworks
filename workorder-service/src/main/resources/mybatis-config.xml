@@ -11,5 +11,7 @@
         <mapper resource="com/microservice/mapper/Account.map.xml"/>
         <mapper resource="com/microservice/mapper/Workorder.map.xml"/>
         <mapper resource="com/microservice/mapper/Repairorder.map.xml"/>
+        <mapper resource="com/microservice/mapper/CompanyFacility.map.xml"/>
+        <mapper resource="com/microservice/mapper/InstallOrder.map.xml"/>
     </mappers>
 </configuration>

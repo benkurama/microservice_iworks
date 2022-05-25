@@ -9,13 +9,15 @@ public class LoginResponse {
 
     private String username;
     private List<String> roles;
+    private String jwt;
 
     public LoginResponse() {
     }
 
-    public LoginResponse(String username, List<String> roles) {
+    public LoginResponse(String username, List<String> roles, String tokken) {
         this.username = username;
         this.roles = roles;
+        this.jwt = tokken;
     }
 
     public String getUsername() {
@@ -32,5 +34,13 @@ public class LoginResponse {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
     }
 }

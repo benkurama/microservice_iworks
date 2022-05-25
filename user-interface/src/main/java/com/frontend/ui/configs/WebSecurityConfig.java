@@ -1,5 +1,7 @@
 package com.frontend.ui.configs;
 
+import com.frontend.ui.jwt.JWTAuthEntryPoint;
+import com.frontend.ui.jwt.JWTTokenFilter;
 import com.frontend.ui.model.Account;
 import com.frontend.ui.services.AccountService;
 import com.frontend.ui.services.UserDetailsServiceImpl;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +24,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 
 import java.util.Optional;
 
@@ -37,6 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private JWTAuthEntryPoint authEntryPoint;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -48,8 +55,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 
                 .and()
-                .exceptionHandling().and().sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
+                .cors().and()
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(authEntryPoint)
+                .and()
+                /*.exceptionHandling().and().sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()*/
+                .exceptionHandling()
+                .authenticationEntryPoint(new MyAuthenticationEntryPoint()).and()
+
                     .formLogin()
                     .loginPage("/login")
                         .loginProcessingUrl("/api/login")
@@ -58,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                         .and()
                         .logout()
+                            .deleteCookies("JSESSIONID")
+                            .invalidateHttpSession(true)
                         .permitAll();
 
 
@@ -90,6 +105,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public JWTTokenFilter authenticationJwtTokenFilter() {
+        return new JWTTokenFilter();
     }
 
     // old codes , hard coded authentication user

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <div th:fragment="table_IO">
+        WorkOrder
+        <table class="table table-striped">
+            <thead>
+    
+                <tr>
+                    <div th:each="col : ${cols}">
+                        <th th:text="${col.COLUMN_NAME}">
+                        </th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr th:each="resLst : ${resLst}">
+                    <td th:text="${resLst.id}"></td>
+                    <td th:text="${resLst.code}"></td>
+                    <td th:text="${resLst.orderType}"></td>
+                    <td th:text="${resLst.facilityCode}"></td>
+                    <td th:text="${resLst.companyCode}"></td>
+                    <td th:text="${resLst.clientCode}"></td>
+                    <td th:text="${resLst.status}"></td>
+                    <td th:text="${resLst.refOrderCode}"></td>
+                    <td th:text="${resLst.refOrderId}"></td>
+                    <td th:text="${resLst.internalOrderType}"></td>
+                    <td th:text="${resLst.bizChannel}"></td>
+                    <td th:text="${resLst.vendorCode}"></td>
+                    <td th:text="${resLst.vendorName}"></td>
+                    <td th:text="${resLst.shipToAttentionTo}"></td>
+                    <td th:text="${resLst.shipToCountryCode}"></td>
+                    <td th:text="${resLst.shipToCountry}"></td>
+                    <td th:text="${resLst.shipToStateCode}"></td>
+                    <td th:text="${resLst.shipToState}"></td>
+                    <td th:text="${resLst.shipToCityCode}"></td>
+                    <td th:text="${resLst.shipToCity}"></td>
+                    <td th:text="${resLst.shipToDistrictCode}"></td>
+                    <td th:text="${resLst.shipToDistrict}"></td>
+                    <td th:text="${resLst.shipToStreetCode}"></td>
+                    <td th:text="${resLst.shipToStreet}"></td>
+                    <td th:text="${resLst.shipToAddress}"></td>
+                    <td th:text="${resLst.shipToPostalCode}"></td>
+                    <td th:text="${resLst.shipToPhone}"></td>
+                    <td th:text="${resLst.shipToMobile}"></td>
+                    <td th:text="${resLst.shipToFax}"></td>
+                    <td th:text="${resLst.shipToEmail}"></td>
+                    <td th:text="${resLst.shipToLatitude}"></td>
+                    <td th:text="${resLst.shipToLongitude}"></td>
+                    <td th:text="${resLst.totalAmount}"></td>
+                    <td th:text="${resLst.totalLines}"></td>
+                    <td th:text="${resLst.totalQty}"></td>
+                    <td th:text="${resLst.totalWeight}"></td>
+                    <td th:text="${resLst.totalVolume}"></td>
+                    <td th:text="${resLst.totalVolumeWeight}"></td>
+                    <td th:text="${resLst.totalFulfillQty}"></td>
+                    <td th:text="${resLst.totalFulfillAmount}"></td>
+                    <td th:text="${resLst.totalFulfillWeight}"></td>
+                    <td th:text="${resLst.totalFulfillVolume}"></td>
+                    <td th:text="${resLst.weightUM}"></td>
+                    <td th:text="${resLst.volumeUM}"></td>
+                    <td th:text="${resLst.sourcePlatformCode}"></td>
+                    <td th:text="${resLst.sourceOrderId}"></td>
+                    <td th:text="${resLst.sourceOrderCode}"></td>
+                    <td th:text="${resLst.auditBy}"></td>
+                    <td th:text="${resLst.auditAt}"></td>
+                    <td th:text="${resLst.errorCode}"></td>
+                    <td th:text="${resLst.errorDesc}"></td>
+                    <td th:text="${resLst.holdCode}"></td>
+                    <td th:text="${resLst.holdUser}"></td>
+                    <td th:text="${resLst.holdAt}"></td>
+                    <td th:text="${resLst.processStamp}"></td>
+                    <td th:text="${resLst.created}"></td>
+                    <td th:text="${resLst.createdBy}"></td>
+                    <td th:text="${resLst.lastUpdated}"></td>
+                    <td th:text="${resLst.lastUpdatedBy}"></td>
+                    <td th:text="${resLst.version}"></td>
+                    <td th:text="${resLst.userDef1}"></td>
+                    <td th:text="${resLst.userDef2}"></td>
+                    <td th:text="${resLst.userDef3}"></td>
+                    <td th:text="${resLst.userDef4}"></td>
+                    <td th:text="${resLst.userDef5}"></td>
+                    <td th:text="${resLst.userDef6}"></td>
+                    <td th:text="${resLst.userDef7}"></td>
+                    <td th:text="${resLst.userDef8}"></td>
+                    <td th:text="${resLst.carrierCode}"></td>
+                    <td th:text="${resLst.carrierServiceCode}"></td>
+                    <td th:text="${resLst.rate}"></td>
+                    <td th:text="${resLst.projectId}"></td>
+                    <td th:text="${resLst.area}"></td>
+                    <td th:text="${resLst.subArea}"></td>
+                    <td th:text="${resLst.sourceCreated}"></td>
+                    <td th:text="${resLst.sourceStatus}"></td>
+                    <td th:text="${resLst.neType}"></td>
+                    <td th:text="${resLst.seriviceType}"></td>
+                    <td th:text="${resLst.soType}"></td>
+                    <td th:text="${resLst.priority}"></td>
+                    <td th:text="${resLst.agreedDate}"></td>
+                    <td th:text="${resLst.groupType}"></td>
+                    <td th:text="${resLst.customerType}"></td>
+                    <td th:text="${resLst.exchange}"></td>
+                    <td th:text="${resLst.operator}"></td>
+                    <td th:text="${resLst.planType}"></td>
+                    <td th:text="${resLst.installer}"></td>
+                    <td th:text="${resLst.reason}"></td>
+                    <td th:text="${resLst.workHours}"></td>
+                    <td th:text="${resLst.installStatus}"></td>
+                    <td th:text="${resLst.isJoint}"></td>
+                    <td th:text="${resLst.appointmentBy}"></td>
+                    <td th:text="${resLst.appointmentAt}"></td>
+                    <td th:text="${resLst.pwType}"></td>
+                    <td th:text="${resLst.errorType}"></td>
+                    <td th:text="${resLst.serviceId}"></td>
+                    <td th:text="${resLst.assignTel}"></td>
+                    <td th:text="${resLst.plan}"></td>
+                    <td th:text="${resLst.cleanStatus}"></td>
+                    <td th:text="${resLst.serviceStaff}"></td>
+                    <td th:text="${resLst.applyDate}"></td>
+                    <td th:text="${resLst.callResult}"></td>
+                    <td th:text="${resLst.callCount}"></td>
+                    <td th:text="${resLst.nextCallTime}"></td>
+                    <td th:text="${resLst.cancelTime}"></td>
+                    <td th:text="${resLst.landmark}"></td>
+                    <td th:text="${resLst.permitType}"></td>
+                    <td th:text="${resLst.remark}"></td>
+                    <td th:text="${resLst.periodType}"></td>
+                    <td th:text="${resLst.secondAuditStatus}"></td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
+
+    
+
+</body>
+</html>

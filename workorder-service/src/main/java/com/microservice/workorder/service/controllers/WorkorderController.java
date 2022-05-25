@@ -1,5 +1,6 @@
 package com.microservice.workorder.service.controllers;
 
+import com.microservice.workorder.service.repository.CompanyFacility;
 import com.microservice.workorder.service.repository.WorkorderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,16 @@ public class WorkorderController {
         return workorderRepository.selectTableColumns();
     }
 
+
+    @Autowired
+    private CompanyFacility companyFacility;
+
+    @GetMapping("/showAllCompanyFacility")
+    public List<Map> showallCompanyFacility(){
+
+        List<Map> res = companyFacility.selectAll();
+
+        return res;
+    }
 
 }

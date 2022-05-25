@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useRef, Component} from "react";
+import { useNavigate} from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -16,7 +16,7 @@ const required = (value) => {
 };
 
 const Login = () => {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const form = useRef();
     const checkBtn = useRef();
     const [username, setUsername] = useState("");
@@ -37,26 +37,29 @@ const Login = () => {
         setMessage("");
         setLoading(true);
         form.current.validateAll();
-        if (checkBtn.current.context._errors.length === 0) {
-            AuthService.login(username, password).then(
-                () => {
-                    navigate("/home");
-                    window.location.reload();
-                },
-                (error) => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-                    setLoading(false);
-                    setMessage(resMessage);
-                }
-            );
-        } else {
+        /*if (checkBtn.current.context._errors.length === 0) {*/
+        AuthService.login(username, password)
+            .then((response)=> {
+                console.log(response);
+                    if (response.data.token){
+                        localStorage.setItem("user",JSON.stringify(response.data));
+                        AuthService.setupAxiosInterceptors(AuthService.createJWTToken(response.data.token));
+                        navigate("/");
+                    }
+            //return response.data;
+            }).catch((error) => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                setLoading(false);
+                setMessage(resMessage);
+            });
+        /*} else {
             setLoading(false);
-        }
+        }*/
     };
     return (
         <div className="col-md-12">
