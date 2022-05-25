@@ -26,15 +26,21 @@ const isUserLoggedIn = () => {
 };
 
 const setupAxiosInterceptors = (token) => {
-    axios.interceptors.request.use(
+    /* axios.interceptors.request.use(
         (config) => {
             if (isUserLoggedIn()) {
-                config.headers.authorization = token
-                //config.headers["Authorization"] = token
+                console.log("done");
+                config.headers['Authorization'] = token
             }
-            return config
+            return config;
         }
-    )
+    ); */
+    if(isUserLoggedIn()){
+        axios.defaults.headers['Authorization'] = token;
+    }else{
+        axios.defaults.headers['Authorization'] = "";
+    }
+
 };
 
 const AuthService = {
