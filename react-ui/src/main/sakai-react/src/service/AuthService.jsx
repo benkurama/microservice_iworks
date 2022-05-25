@@ -30,6 +30,7 @@ const setupAxiosInterceptors = (token) => {
         (config) => {
             if (isUserLoggedIn()) {
                 config.headers.authorization = token
+                //config.headers["Authorization"] = token
             }
             return config
         }

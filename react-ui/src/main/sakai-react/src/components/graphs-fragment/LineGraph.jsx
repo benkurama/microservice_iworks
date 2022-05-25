@@ -6,7 +6,6 @@ import BaseService from '../../services/BaseService';
 export default function LineGraph() {
 
     const [content, setContent] = useState("");
-
     const [lineGraph, setLineGraph] = useState("");
 
     useEffect(() => {

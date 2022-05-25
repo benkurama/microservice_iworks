@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import React, {useEffect, useState} from "react";
+import fiberlog from './assets/images/fiberlog.png';
 
 export const AppTopbar = (props) => {
 
@@ -20,8 +21,8 @@ export const AppTopbar = (props) => {
 
     return (
         <div className="layout-topbar">
-            <Link to="/" className="layout-topbar-logo">
-                <img src={props.layoutColorMode === 'light' ? 'assets/layout/images/logo-dark.svg' : 'assets/layout/images/logo-white.svg'} alt="logo"/>
+            <Link to="/" className="layout-topbar-logo" >
+                <img src={fiberlog} alt="logo" />
                 <span>JD MICROSERVICE</span>
             </Link>
 

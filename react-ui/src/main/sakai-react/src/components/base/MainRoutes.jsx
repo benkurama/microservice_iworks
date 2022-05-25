@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router";
 
-import Login from "../../pages/Login2";
+import Login from "../../pages/Login";
 import Home from "../../pages/Home";
 import PublicRoutes from "./PublicRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
@@ -12,8 +12,8 @@ const MainRoutes = () => (
 
         <Route path="/" element={<ProtectedRoutes />}>
             
-                <Route path="/" element={<Navigate replace to="home" />} />
-                <Route path="home/*" element={<Home/>} />
+                <Route path="/" element={<Home/>} />
+                <Route path="*" element={<Home/>} />
              
             
         </Route>

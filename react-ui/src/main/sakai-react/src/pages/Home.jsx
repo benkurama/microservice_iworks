@@ -38,18 +38,25 @@ import { Tooltip } from 'primereact/tooltip';
 
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
+
 import 'primeflex/primeflex.css';
 import 'prismjs/themes/prism-coy.css';
 import '../assets/demo/flags/flags.css';
 import '../assets/demo/Demos.scss';
 import '../assets/layout/layout.scss';
 import '../App.scss';
-//import AuthService from '../service/AuthService';
-//import EventBus from '../common/EventBus';
+
 
 import {useNavigate} from "react-router";
+import Graphs from '../pages/fragments/Graphs';
+
+//#f1c40f
 
 const Home = () => {
+
+
+
+
     const [layoutMode, setLayoutMode] = useState('static');
     const [layoutColorMode, setLayoutColorMode] = useState('light')
     const [inputStyle, setInputStyle] = useState('outlined');
@@ -61,12 +68,20 @@ const Home = () => {
     const copyTooltipRef = useRef();
     const location = useLocation();
 
+    const [reloadHomepage, setReloadHomepage] = useState(true);
+    const navigation = useNavigate();
+
     PrimeReact.ripple = true;
 
     let menuClick = false;
     let mobileTopbarMenuClick = false;
 
     useEffect(() => {
+        reloadOnce();
+    }, [reloadHomepage]);
+
+    useEffect(() => {
+
         if (mobileMenuActive) {
             addClass(document.body, "body-overflow-hidden");
         } else {
@@ -77,6 +92,24 @@ const Home = () => {
     useEffect(() => {
         copyTooltipRef && copyTooltipRef.current && copyTooltipRef.current.updateTargetEvents();
     }, [location]);
+
+    const reloadOnce = () => {
+        setTimeout(function() { //Start the timer
+            const value = sessionStorage.getItem("loadOnce");
+            
+            if(reloadHomepage){
+                //alert('reload done');
+                setReloadHomepage(false);
+                sessionStorage.setItem("loadOnce", false);
+                //navigation("/graphs");
+                //window.open("/", "_self");
+                window.open("/");
+                //alert(value);
+            }
+           
+
+        }.bind(this), 1000)
+      };
 
     const onInputStyleChange = (inputStyle) => {
         setInputStyle(inputStyle);
@@ -164,6 +197,12 @@ const Home = () => {
             label: 'Home',
             items: [{
                 label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
+            }]
+        },
+        {
+            label: 'JD System Pages',
+            items: [{
+                label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'
             }]
         },
         {
@@ -289,7 +328,7 @@ const Home = () => {
 
 // benkuramax section
 
-    const navigation = useNavigate();
+    
     const onMobileSubTopbarLOGOUT = (event) => {
         
         event.preventDefault();
@@ -316,7 +355,7 @@ const Home = () => {
             <div className="layout-main-container">
                 <div className="layout-main">
                 <Routes>
-                    <Route path="/" exact element={<Dashboard colorMode={layoutColorMode} location={location} />} />
+                    <Route path="/" element={<Dashboard colorMode={layoutColorMode} location={location} />} />
                     <Route path="/formlayout" element={<FormLayoutDemo />} />
                     <Route path="/input" element={<InputDemo />} />
                     <Route path="/floatlabel" element={<FloatLabelDemo/>} />
@@ -339,6 +378,10 @@ const Home = () => {
                     <Route path="/crud" element={<Crud/>} />
                     <Route path="/empty" element={<EmptyPage/>} />
                     <Route path="/documentation" element={<Documentation/>} />
+
+                    <Route path="/graphs" element ={ <Graphs colorMode={layoutColorMode} location={location} />} />
+
+                    
                 </Routes>
 
                 </div>

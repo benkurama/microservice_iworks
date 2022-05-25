@@ -29,14 +29,20 @@ public class LineGraph {
         public int[] data;
         public String label;
         public String borderColor;
+        public boolean fill;
+        public double tension;
 
         public datasets() {
+
         }
 
         public datasets(String label, int[] data, String borderColor) {
             this.data = data;
             this.label = label;
             this.borderColor = borderColor;
+
+            this.fill = false;
+            this.tension=.4;
         }
 
         public String getLabel() {
@@ -61,6 +67,22 @@ public class LineGraph {
 
         public void setBorderColor(String borderColor) {
             this.borderColor = borderColor;
+        }
+
+        public boolean isFill() {
+            return fill;
+        }
+
+        public void setFill(boolean fill) {
+            this.fill = fill;
+        }
+
+        public double getTension() {
+            return tension;
+        }
+
+        public void setTension(double tension) {
+            this.tension = tension;
         }
     }
 }

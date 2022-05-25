@@ -22,8 +22,10 @@ public class GraphController {
     @Autowired
     InstallService installService;
 
-    String[] bgColorList = new String[] {"#42A5F5","#66BB6A","#FFA726","#81C784","#FF6384","#36A2EB","#FFCE56", "#64B5F6"
-    ,"#00008B","#6A5ACD", "#800000", "#800080", "#808000", "#BDB76B", "#DC143C"};
+    String[] bgColorList = new String[] {"#FFCE56", "#64B5F6"
+    ,"#00008B","#6A5ACD", "#800000", "#800080", "#808000",
+            "#BDB76B", "#DC143C","#42A5F5","#66BB6A","#FFA726","#81C784"
+    ,"#FF6384","#36A2EB"};
 
     @GetMapping("/show")
     public GraphsModel mainShow(){
@@ -128,16 +130,11 @@ public class GraphController {
         lg.setLabels(dateStr);
         List<LineGraph.datasets> datasetsList = new ArrayList<>();
 
-
         int iii=0;
         for(Map map : mapList){
-
-
             String subArea = map.get("label").toString();
             int[] datas = (int[])map.get(subArea);
-
             datasetsList.add(new LineGraph.datasets(subArea, datas, bgColorList[iii]));
-
             iii++;
         }
         lg.setDatasets(datasetsList);

@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
@@ -71,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/sign-in").permitAll()
                 .antMatchers("/api/home").permitAll()
                 .antMatchers("/resource/resMenu").permitAll()
-                .antMatchers("/",
+                .antMatchers(
                         "/favicon.ico",
                         "/**/*.png",
                         "/**/*.gif",
@@ -81,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js",
                         "/**/*.jsx",
+                        "/assets/**",
                         "/**/*.map").permitAll()
                 .anyRequest().authenticated();
 
@@ -90,7 +92,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions().sameOrigin()  //H2 Console Needs this setting
                 .cacheControl(); //disable caching
+
+        // disable security setup
+        //http.authorizeRequests().antMatchers("/").permitAll();
     }
+
+
 
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
@@ -106,6 +113,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.GET,
                         "/" //Other Stuff You want to Ignore
+                );
+
+        webSecurity
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**", "/error"
+
                 );
     }
 
