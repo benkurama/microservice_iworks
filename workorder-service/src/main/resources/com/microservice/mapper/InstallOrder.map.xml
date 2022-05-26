@@ -159,4 +159,59 @@
         group by  processType
     </select>
 
+    <select id="selectUserCount" resultType="Map">
+        select
+            (select count(1) count from ttx_user) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from ttx_user
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectInstallCount" resultType="Map">
+        select
+            (select count(1) count from install_order_header) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from install_order_header
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectTransCount" resultType="Map">
+        select
+            (select count(1) count from transaction_history) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from transaction_history
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectShipCount" resultType="Map">
+        select
+            (select count(1) count from shipment_confirm_header) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from shipment_confirm_header
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectCurrentDataInstallOrder" resultType="Map">
+        select
+        created,
+        code,
+        shipToAttentionTo,
+        area,
+        neType,
+        seriviceType,
+        soType,
+        groupType,
+        serviceId,
+        shipToAddress,
+        sourceOrderCode
+        from
+        install_order_header
+        where date(created) = current_date()
+        order by created
+    </select>
+
 </mapper>

@@ -33,4 +33,10 @@ public interface InstallService {
 
     @GetMapping("/selectTransHistoryGraph001")
     public List<Map> selectTransHistoryGraph001();
+
+    @GetMapping("/selectDashbordCount")
+    public Map selectDashbordCount();
+
+    @GetMapping("/selectCurrentDataInstallOrder")
+    public List<Map> selectCurrentDataInstallOrder();
 }

@@ -288,4 +288,18 @@ public class GraphController {
 
         return gm;
     }
+
+    @GetMapping("/selectDashbordCount")
+    public Map selectDashbordCount(){
+        Map res = installService.selectDashbordCount();
+
+        return res;
+    }
+
+    @GetMapping("/selectCurrentDataInstallOrder")
+    public List<Map> selectCurrentDataInstallOrder(){
+        List<Map> res = installService.selectCurrentDataInstallOrder();
+
+        return res;
+    }
 }

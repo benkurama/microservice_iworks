@@ -8,7 +8,7 @@ import { AppFooter } from '../AppFooter';
 import { AppMenu } from '../AppMenu';
 import { AppConfig } from '../AppConfig';
 
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../pages/fragments/Dashboard';
 import ButtonDemo from '../components/ButtonDemo';
 import ChartDemo from '../components/ChartDemo';
 import Documentation from '../components/Documentation';
@@ -75,11 +75,11 @@ const Home = () => {
 
     let menuClick = false;
     let mobileTopbarMenuClick = false;
-
+/*
     useEffect(() => {
         reloadOnce();
     }, [reloadHomepage]);
-
+*/
     useEffect(() => {
 
         if (mobileMenuActive) {
