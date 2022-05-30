@@ -39,4 +39,8 @@ public interface InstallService {
 
     @GetMapping("/selectCurrentDataInstallOrder")
     public List<Map> selectCurrentDataInstallOrder();
+
+    @GetMapping("/selecAreaGroupByState")
+    public List<Map> selecAreaGroupByState();
+
 }

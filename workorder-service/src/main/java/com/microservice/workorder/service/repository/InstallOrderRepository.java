@@ -31,4 +31,7 @@ public interface InstallOrderRepository {
     List<Map> selectShipCount();
 
     List<Map> selectCurrentDataInstallOrder();
+
+    List<Map> selecAreaGroupByState();
+
 }

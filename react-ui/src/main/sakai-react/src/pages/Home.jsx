@@ -54,9 +54,6 @@ import Graphs from '../pages/fragments/Graphs';
 
 const Home = () => {
 
-
-
-
     const [layoutMode, setLayoutMode] = useState('static');
     const [layoutColorMode, setLayoutColorMode] = useState('light')
     const [inputStyle, setInputStyle] = useState('outlined');
@@ -93,7 +90,7 @@ const Home = () => {
         copyTooltipRef && copyTooltipRef.current && copyTooltipRef.current.updateTargetEvents();
     }, [location]);
 
-    const reloadOnce = () => {
+    /*const reloadOnce = () => {
         setTimeout(function() { //Start the timer
             const value = sessionStorage.getItem("loadOnce");
             
@@ -109,7 +106,7 @@ const Home = () => {
            
 
         }.bind(this), 1000)
-      };
+      };*/
 
     const onInputStyleChange = (inputStyle) => {
         setInputStyle(inputStyle);

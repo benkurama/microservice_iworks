@@ -214,4 +214,13 @@
         order by created
     </select>
 
+    <select id="selecAreaGroupByState" resultType="Map">
+        select main.state , group_concat(main.summary) total_count from (
+            select state, concat(' ', level,':' ,count(1)) summary from area
+            group by state, level
+        ) main
+        where state is not null
+        group by main.state
+    </select>
+
 </mapper>

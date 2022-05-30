@@ -79,4 +79,12 @@ public class InstalOrderController {
 
         return installOrderRepository.selectCurrentDataInstallOrder();
     }
+
+    @GetMapping("/selecAreaGroupByState")
+    public List<Map> selecAreaGroupByState(){
+
+        return installOrderRepository.selecAreaGroupByState();
+    }
+
+
 }
