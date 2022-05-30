@@ -14,6 +14,7 @@ public class JwtResponse {
     private String id;
     private String username;
     private List<String> roles;
+    private String accessToken;
     private boolean isAuthenticated;
 
 }

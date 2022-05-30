@@ -54,9 +54,6 @@ import Graphs from '../pages/fragments/Graphs';
 
 const Home = () => {
 
-
-
-
     const [layoutMode, setLayoutMode] = useState('static');
     const [layoutColorMode, setLayoutColorMode] = useState('light')
     const [inputStyle, setInputStyle] = useState('outlined');

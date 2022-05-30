@@ -1,8 +1,6 @@
 package com.fiberhome.authservice;
 
 import com.fiberhome.authservice.security.JwtTokenUtils;
-import com.fiberhome.authservice.security.TokenAuthenticationService;
-import com.fiberhome.authservice.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -37,15 +35,12 @@ public class AuthServiceApplication {
         };
     }
 
-    @Autowired
-    private RedisService redisService;
-
     @Value("${app.jwtSecret}")
     private String encKey;
-
+    
     @Bean
-    public TokenAuthenticationService tokenAuthService() {
-        return new TokenAuthenticationService(redisService,encKey);
+    public JwtTokenUtils jwtTokenUtils() {
+        return new JwtTokenUtils(encKey);
     }
 
 }

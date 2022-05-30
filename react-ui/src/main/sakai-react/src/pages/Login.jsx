@@ -15,7 +15,7 @@ const h2Style = {
         "textShadow": "0 4px 16px #fff",
         "fontSize": "30px",
         "fontWeight": "100"
-      
+
 }
 
 const fieldsetStyle = {
@@ -126,9 +126,9 @@ const formStyle = {
         AuthService.login(username, password)
             .then((response)=> {
                 console.log(response);
-                    if (response.data.token){
+                    if (response.data.accessToken){
                         localStorage.setItem("user",JSON.stringify(response.data));
-                        AuthService.setupAxiosInterceptors(AuthService.createJWTToken(response.data.token));
+                        AuthService.setupAxiosInterceptors(AuthService.createJWTToken(response.data.accessToken));
                         navigate("/");
                     }
             //return response.data;
