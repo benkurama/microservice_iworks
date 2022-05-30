@@ -8,7 +8,7 @@ import { AppFooter } from '../AppFooter';
 import { AppMenu } from '../AppMenu';
 import { AppConfig } from '../AppConfig';
 
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../pages/fragments/Dashboard';
 import ButtonDemo from '../components/ButtonDemo';
 import ChartDemo from '../components/ChartDemo';
 import Documentation from '../components/Documentation';
@@ -54,9 +54,6 @@ import Graphs from '../pages/fragments/Graphs';
 
 const Home = () => {
 
-
-
-
     const [layoutMode, setLayoutMode] = useState('static');
     const [layoutColorMode, setLayoutColorMode] = useState('light')
     const [inputStyle, setInputStyle] = useState('outlined');
@@ -75,11 +72,11 @@ const Home = () => {
 
     let menuClick = false;
     let mobileTopbarMenuClick = false;
-
+/*
     useEffect(() => {
         reloadOnce();
     }, [reloadHomepage]);
-
+*/
     useEffect(() => {
 
         if (mobileMenuActive) {
@@ -93,14 +90,14 @@ const Home = () => {
         copyTooltipRef && copyTooltipRef.current && copyTooltipRef.current.updateTargetEvents();
     }, [location]);
 
-    const reloadOnce = () => {
+    /*const reloadOnce = () => {
         setTimeout(function() { //Start the timer
             const value = sessionStorage.getItem("loadOnce");
             
             if(reloadHomepage){
                 //alert('reload done');
-                setReloadHomepage(false);
-                sessionStorage.setItem("loadOnce", false);
+                //setReloadHomepage(false);
+                //sessionStorage.setItem("loadOnce", false);
                 //navigation("/graphs");
                 //window.open("/", "_self");
                 window.open("/");
@@ -109,7 +106,7 @@ const Home = () => {
            
 
         }.bind(this), 1000)
-      };
+      };*/
 
     const onInputStyleChange = (inputStyle) => {
         setInputStyle(inputStyle);
@@ -219,7 +216,7 @@ const Home = () => {
                 { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: 'panel' },
                 { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: 'overlay' },
                 { label: "Media", icon: "pi pi-fw pi-image", to: "media" },
-                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/menu' },
+                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: 'menu' },
                 { label: 'Message', icon: 'pi pi-fw pi-comment', to: 'messages' },
                 { label: 'File', icon: 'pi pi-fw pi-file', to: 'file' },
                 { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: 'chart' },
@@ -367,7 +364,7 @@ const Home = () => {
                     <Route path="/panel" element={<PanelDemo/>} />
                     <Route path="/overlay" element={<OverlayDemo/>} />
                     <Route path="/media" element={<MediaDemo/>} />
-                    <Route path="/menu" element={<MenuDemo/>} />
+                    <Route path="/menu" element={<MenuDemo /> } />
                     <Route path="/messages" element={<MessagesDemo/>} />
                     <Route path="/blocks" element={<BlocksDemo/>} />
                     <Route path="/icons" element={<IconsDemo/>} />

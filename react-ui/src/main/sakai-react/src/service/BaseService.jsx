@@ -3,7 +3,7 @@ import authHeader from "./AuthHeader";
 const API_URL = "http://localhost:8080/";
 
 const HttpGet = (path) => {
-    return axios.get(API_URL + path,{ headers: authHeader() });
+    return axios.get(API_URL + path);
 };
 
 const BaseService = {

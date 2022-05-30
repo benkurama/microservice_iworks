@@ -15,4 +15,23 @@ public interface InstallOrderRepository {
     List<Map> selectGraph001();
 
     List<Map> selectGraph002();
+
+    List<Map> selectReceiptGraph001();
+
+    List<Map> selectReceiptGraph002();
+
+    List<Map> selectTransHistoryGraph001();
+
+    List<Map> selectUserCount();
+
+    List<Map> selectInstallCount();
+
+    List<Map> selectTransCount();
+
+    List<Map> selectShipCount();
+
+    List<Map> selectCurrentDataInstallOrder();
+
+    List<Map> selecAreaGroupByState();
+
 }
