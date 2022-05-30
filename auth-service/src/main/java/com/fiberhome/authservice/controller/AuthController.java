@@ -4,10 +4,7 @@ import com.fiberhome.authservice.dto.requests.LoginRequest;
 import com.fiberhome.authservice.dto.response.JwtResponse;
 import com.fiberhome.authservice.exceptions.AuthenticationException;
 import com.fiberhome.authservice.model.LoginUserDetails;
-import com.fiberhome.authservice.model.TokensEntity;
 import com.fiberhome.authservice.security.JwtTokenUtils;
-import com.fiberhome.authservice.security.filters.JWTAuthenticationFilter;
-import jdk.net.SocketFlow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +15,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -51,11 +44,12 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             if (authentication.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                TokensEntity jwt = jwtTokenUtils.generateJwtToken(authentication);
-
-                return ResponseEntity.ok(JwtResponse.builder().id(jwt.getId())
-                        .username(jwt.getUsername())
-                        .roles(jwt.getRole())
+                String jwt = jwtTokenUtils.generateJwtToken(authentication);
+                LoginUserDetails authUser =  (LoginUserDetails) authentication.getPrincipal();
+                return ResponseEntity.ok(JwtResponse.builder().id(jwt)
+                        .username(authUser.getUsername())
+                        .roles(authUser.getAuthorities().stream()
+                                .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                         .isAuthenticated(true).build());
             }
         } catch (DisabledException e) {

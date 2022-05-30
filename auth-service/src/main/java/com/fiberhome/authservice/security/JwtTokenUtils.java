@@ -5,7 +5,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fiberhome.authservice.model.LoginUserDetails;
-import com.fiberhome.authservice.model.TokensEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
@@ -31,7 +30,7 @@ public class JwtTokenUtils implements Serializable {
     Algorithm algorithm = Algorithm.HMAC256(jwtSecret.getBytes());
     JWTVerifier verifier = JWT.require(algorithm).build();
 
-    public TokensEntity generateJwtToken(Authentication authentication) {
+    public String generateJwtToken(Authentication authentication) {
 
         LoginUserDetails userPrincipal = (LoginUserDetails) authentication.getPrincipal();
 
@@ -44,18 +43,11 @@ public class JwtTokenUtils implements Serializable {
                 .withIssuedAt(new Date())
                 .withIssuer("Fiberhome")
                 .withExpiresAt(Date.from(LocalDateTime.now().plusHours(6).toInstant(ZoneOffset.UTC)))
-                .sign(Algorithm.HMAC256(jwtSecret.getBytes()));
+                .sign(algorithm);
 
-        TokensEntity tokensEntity = TokensEntity.builder().id(String.valueOf(UUID.randomUUID()))
-                .authenticationToken(jwt)
-                .username(userPrincipal.getUsername())
-                .role(authorities)
-                .createdBy("SYSTEM").createdOn(LocalDateTime.now())
-                .modifiedBy("SYSTEM").modifiedOn(LocalDateTime.now())
-                .build();
 
         //tokensEntity = tokenRedisService.save(tokensEntity);
-        return tokensEntity;
+        return jwt;
     }
 
     public boolean validateJwtToken(String authToken) {
