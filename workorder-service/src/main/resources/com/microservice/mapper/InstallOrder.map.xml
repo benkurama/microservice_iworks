@@ -142,4 +142,85 @@
         order by subArea, Month(created)
     </select>
 
+    <select id="selectReceiptGraph001" resultType="Map">
+        select  date_format(created, "%M-%Y") dateStr, count(1)  count from receipt_header
+            group by date_format(created, "%M-%Y")
+            order by Month(created)
+    </select>
+
+    <select id="selectReceiptGraph002" resultType="Map">
+        select  internalInstructionType, date_format(created, "%M-%Y") dateStr, count(1)  count from receipt_header
+            group by internalInstructionType, date_format(created, "%M-%Y")
+            order by internalInstructionType, Month(created)
+    </select>
+
+    <select id="selectTransHistoryGraph001" resultType="Map">
+        select  processType, count(1) count from transaction_history
+        group by  processType
+    </select>
+
+    <select id="selectUserCount" resultType="Map">
+        select
+            (select count(1) count from ttx_user) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from ttx_user
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectInstallCount" resultType="Map">
+        select
+            (select count(1) count from install_order_header) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from install_order_header
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectTransCount" resultType="Map">
+        select
+            (select count(1) count from transaction_history) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from transaction_history
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectShipCount" resultType="Map">
+        select
+            (select count(1) count from shipment_confirm_header) total_count,
+            monthname(current_date()) curr_month,
+            count(1) curr_count from shipment_confirm_header
+        where month(created) = month(current_date()) and year(created) = year(current_date())
+        order by created
+    </select>
+
+    <select id="selectCurrentDataInstallOrder" resultType="Map">
+        select
+        created,
+        code,
+        shipToAttentionTo,
+        area,
+        neType,
+        seriviceType,
+        soType,
+        groupType,
+        serviceId,
+        shipToAddress,
+        sourceOrderCode
+        from
+        install_order_header
+        where date(created) = current_date()
+        order by created
+    </select>
+
+    <select id="selecAreaGroupByState" resultType="Map">
+        select main.state , group_concat(main.summary) total_count from (
+            select state, concat(' ', level,':' ,count(1)) summary from area
+            group by state, level
+        ) main
+        where state is not null
+        group by main.state
+    </select>
+
 </mapper>

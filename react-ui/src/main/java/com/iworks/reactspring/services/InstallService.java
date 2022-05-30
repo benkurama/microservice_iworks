@@ -23,4 +23,24 @@ public interface InstallService {
 
     @GetMapping("/showGraph002")
     public List<Map> showGraph002();
+
+
+    @GetMapping("/showReceiptGraph001")
+    public List<Map> showReceiptGraph001();
+
+    @GetMapping("/showReceiptGraph002")
+    public List<Map> showReceiptGraph002();
+
+    @GetMapping("/selectTransHistoryGraph001")
+    public List<Map> selectTransHistoryGraph001();
+
+    @GetMapping("/selectDashbordCount")
+    public Map selectDashbordCount();
+
+    @GetMapping("/selectCurrentDataInstallOrder")
+    public List<Map> selectCurrentDataInstallOrder();
+
+    @GetMapping("/selecAreaGroupByState")
+    public List<Map> selecAreaGroupByState();
+
 }

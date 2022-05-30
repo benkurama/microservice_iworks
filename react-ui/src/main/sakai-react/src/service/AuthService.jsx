@@ -1,8 +1,8 @@
 import axios from "axios";
-const API_URL = "http://localhost:9999/auth/";
+const API_URL = "http://localhost:8080/api/";
 const  login = (username,password) => {
     console.log(username);
-    return axios.post(API_URL + "login", {
+    return axios.post(API_URL + "sign-in", {
         username,
         password
     })  ;
@@ -29,18 +29,17 @@ const setupAxiosInterceptors = (token) => {
     /* axios.interceptors.request.use(
         (config) => {
             if (isUserLoggedIn()) {
-                console.log("done");
-                config.headers['Authorization'] = token
+                config.headers.authorization = token
+                //config.headers["Authorization"] = token
             }
-            return config;
+            return config
         }
-    ); */
+    ) */
     if(isUserLoggedIn()){
         axios.defaults.headers['Authorization'] = token;
     }else{
         axios.defaults.headers['Authorization'] = "";
     }
-
 };
 
 const AuthService = {

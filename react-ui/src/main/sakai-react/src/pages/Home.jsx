@@ -8,7 +8,7 @@ import { AppFooter } from '../AppFooter';
 import { AppMenu } from '../AppMenu';
 import { AppConfig } from '../AppConfig';
 
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../pages/fragments/Dashboard';
 import ButtonDemo from '../components/ButtonDemo';
 import ChartDemo from '../components/ChartDemo';
 import Documentation from '../components/Documentation';
@@ -54,9 +54,6 @@ import Graphs from '../pages/fragments/Graphs';
 
 const Home = () => {
 
-
-
-
     const [layoutMode, setLayoutMode] = useState('static');
     const [layoutColorMode, setLayoutColorMode] = useState('light')
     const [inputStyle, setInputStyle] = useState('outlined');
@@ -68,13 +65,18 @@ const Home = () => {
     const copyTooltipRef = useRef();
     const location = useLocation();
 
+    const [reloadHomepage, setReloadHomepage] = useState(true);
     const navigation = useNavigate();
 
     PrimeReact.ripple = true;
 
     let menuClick = false;
     let mobileTopbarMenuClick = false;
-
+/*
+    useEffect(() => {
+        reloadOnce();
+    }, [reloadHomepage]);
+*/
     useEffect(() => {
 
         if (mobileMenuActive) {
@@ -87,6 +89,24 @@ const Home = () => {
     useEffect(() => {
         copyTooltipRef && copyTooltipRef.current && copyTooltipRef.current.updateTargetEvents();
     }, [location]);
+
+    /*const reloadOnce = () => {
+        setTimeout(function() { //Start the timer
+            const value = sessionStorage.getItem("loadOnce");
+            
+            if(reloadHomepage){
+                //alert('reload done');
+                //setReloadHomepage(false);
+                //sessionStorage.setItem("loadOnce", false);
+                //navigation("/graphs");
+                //window.open("/", "_self");
+                window.open("/");
+                //alert(value);
+            }
+           
+
+        }.bind(this), 1000)
+      };*/
 
     const onInputStyleChange = (inputStyle) => {
         setInputStyle(inputStyle);
@@ -196,7 +216,7 @@ const Home = () => {
                 { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: 'panel' },
                 { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: 'overlay' },
                 { label: "Media", icon: "pi pi-fw pi-image", to: "media" },
-                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: '/menu' },
+                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: 'menu' },
                 { label: 'Message', icon: 'pi pi-fw pi-comment', to: 'messages' },
                 { label: 'File', icon: 'pi pi-fw pi-file', to: 'file' },
                 { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: 'chart' },
@@ -305,9 +325,9 @@ const Home = () => {
 
 // benkuramax section
 
-
+    
     const onMobileSubTopbarLOGOUT = (event) => {
-
+        
         event.preventDefault();
         localStorage.removeItem("user");
         navigation("/login");
@@ -320,9 +340,9 @@ const Home = () => {
             <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
 
             <AppTopbar onToggleMenuClick={onToggleMenuClick} layoutColorMode={layoutColorMode}
-                mobileTopbarMenuActive={mobileTopbarMenuActive} onMobileTopbarMenuClick={onMobileTopbarMenuClick} onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick}
+                mobileTopbarMenuActive={mobileTopbarMenuActive} onMobileTopbarMenuClick={onMobileTopbarMenuClick} onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick} 
                 onMobileSubTopbarLOGOUT={onMobileSubTopbarLOGOUT}
-
+               
                 />
 
             <div className="layout-sidebar" onClick={onSidebarClick}>
@@ -332,7 +352,7 @@ const Home = () => {
             <div className="layout-main-container">
                 <div className="layout-main">
                 <Routes>
-                    <Route path="/dashboard" element={<Dashboard colorMode={layoutColorMode} location={location} />} />
+                    <Route path="/" element={<Dashboard colorMode={layoutColorMode} location={location} />} />
                     <Route path="/formlayout" element={<FormLayoutDemo />} />
                     <Route path="/input" element={<InputDemo />} />
                     <Route path="/floatlabel" element={<FloatLabelDemo/>} />
@@ -344,7 +364,7 @@ const Home = () => {
                     <Route path="/panel" element={<PanelDemo/>} />
                     <Route path="/overlay" element={<OverlayDemo/>} />
                     <Route path="/media" element={<MediaDemo/>} />
-                    <Route path="/menu" element={<MenuDemo/>} />
+                    <Route path="/menu" element={<MenuDemo /> } />
                     <Route path="/messages" element={<MessagesDemo/>} />
                     <Route path="/blocks" element={<BlocksDemo/>} />
                     <Route path="/icons" element={<IconsDemo/>} />
@@ -358,7 +378,7 @@ const Home = () => {
 
                     <Route path="/graphs" element ={ <Graphs colorMode={layoutColorMode} location={location} />} />
 
-
+                    
                 </Routes>
 
                 </div>
