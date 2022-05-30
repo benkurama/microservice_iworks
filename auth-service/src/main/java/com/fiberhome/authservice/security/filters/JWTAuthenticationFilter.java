@@ -35,8 +35,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
     private ObjectMapper mapper=new ObjectMapper();
 
-    //private final RedisService tokensRedisService;
-
     public JWTAuthenticationFilter(AuthenticationManager authenticationmanager){
         this.authenticationManager = authenticationmanager;
     }
