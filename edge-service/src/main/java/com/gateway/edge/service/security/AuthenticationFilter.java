@@ -3,6 +3,7 @@ package com.gateway.edge.service.security;
 import com.auth0.jwt.interfaces.Claim;
 import com.gateway.edge.service.security.util.JwtTokenUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -34,7 +35,7 @@ public class AuthenticationFilter implements GatewayFilter {
             if(this.isAuthMissing(request)){
                 return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
             }
-            final String token = this.getAuthHeader(request);
+            final String token = StringUtils.substringAfter(this.getAuthHeader(request)," ");
             if (jwtTokenUtils.isInvalid(token))
                 return this.onError(exchange, "Authorization header is invalid", HttpStatus.UNAUTHORIZED);
 
@@ -59,6 +60,7 @@ public class AuthenticationFilter implements GatewayFilter {
     }
 
     private void populateRequestWithHeaders(ServerWebExchange exchange, String token) {
+
         Map<String, Claim> claims = jwtTokenUtils.getAllClaimsFromToken(token);
         exchange.getRequest().mutate()
                 .header("id", String.valueOf(claims.get("id")))

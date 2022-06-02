@@ -1,11 +1,21 @@
-import axios from "axios";
-const API_URL = "http://localhost:9999/auth/";
-const  login = (username,password) => {
-    console.log(username);
-    return axios.post(API_URL + "login", {
+import axios from  '../components/base/axios';
+
+const API_URL = "http://localhost:8090/auth/";
+const  login = async (username,password) => {
+        console.log(username);
+        return await axios.post("/auth/login", {
+            username,
+            password,
+            },
+            {
+                headers: { 'Content-Type': 'multipart/form-data'},
+                withCredentials: true
+            }
+        );
+    /*return axios.post(API_URL + "login", {
         username,
         password
-    })  ;
+    })  ;*/
 
 };
 const createJWTToken = (token) =>{

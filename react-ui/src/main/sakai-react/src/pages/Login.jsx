@@ -1,20 +1,21 @@
 import '../assets/css/loginStyle.css';
-import React, {useState, useRef, useEffect} from "react";
+import React, {useContext, useRef, useState} from "react";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import AuthService from "../service/AuthService";
-import { useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import AuthContext from "../context/AuthProvider";
 //import CheckButton from "react-validation/build/button";
 
 
 const h2Style = {
 
-        "marginBottom": "5px",
-        "textAlign": "center",
-        "textShadow": "0 4px 16px #fff",
-        "fontSize": "30px",
-        "fontWeight": "100"
+    "marginBottom": "5px",
+    "textAlign": "center",
+    "textShadow": "0 4px 16px #fff",
+    "fontSize": "30px",
+    "fontWeight": "100"
 
 }
 
@@ -28,8 +29,8 @@ const fieldsetStyle = {
 
 const legendStyle = {
     "padding": "5px",
-            "backgroundColor": "#fff",
-            "borderRadius": "5px"
+    "backgroundColor": "#fff",
+    "borderRadius": "5px"
 }
 
 const ulStyle = {
@@ -56,7 +57,7 @@ const inputStyle = {
     "borderRadius": "5px",
     "&:hover": {
         "border": "1px solid #aaf"
-      }
+    }
 }
 
 const buttonStyle = {
@@ -68,7 +69,7 @@ const buttonStyle = {
     "&:hover": {
         "backgroundColor": "#eef",
         "border": "1px solid #aaf"
-      }
+    }
 }
 
 const formStyle = {
@@ -81,14 +82,10 @@ const formStyle = {
     "backgroundColor": "rgba(255,255,255,0.9)",
     "borderRadius": "10px",
     "boxShadow": "0 32px 64px rgba(0,0,0,0.2)",
-  };
+};
 
-  const Login = () => {
-
-    useEffect(() => {
-        sessionStorage.setItem("loadOnce", true);
-    }, []);
-
+const Login = () => {
+    const {setAuth} = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -96,6 +93,7 @@ const formStyle = {
     //const checkBtn = useRef();
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+    const from = window.location.pathname || "/";
 
     const onChangeUsername = (e) => {
         const username = e.target.value;
@@ -124,24 +122,28 @@ const formStyle = {
         form.current.validateAll();
         /*if (checkBtn.current.context._errors.length === 0) {*/
         AuthService.login(username, password)
-            .then((response)=> {
+            .then((response) => {
                 console.log(response);
-                    if (response.data.id){
-                        localStorage.setItem("user",JSON.stringify(response.data));
-                        AuthService.setupAxiosInterceptors(AuthService.createJWTToken(response.data.id));
-                        navigate("/");
-                    }
-            //return response.data;
+                if (response.data.id) {
+                    const accessToken = response?.data?.id;
+                    setAuth({username, accessToken});
+                    localStorage.setItem("user", JSON.stringify(response.data));
+                    AuthService.setupAxiosInterceptors(AuthService.createJWTToken(accessToken));
+                    navigate("/", {replace: true});
+                }
+                //return response.data;
             }).catch((error) => {
-                const resMessage =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                setLoading(false);
-                setMessage(resMessage);
-            });
+            if (!error?.response) {
+                setMessage('No Server Response');
+            } else if (error.response?.status === 400) {
+                setMessage('Missing username or password');
+            } else if (error.response?.status === 401) {
+                setMessage('Unauthorized');
+            } else {
+                setMessage('Login failed');
+            }
+            setLoading(false);
+        });
         /*} else {
             setLoading(false);
         }*/
@@ -180,7 +182,7 @@ const formStyle = {
                             />
                         </li>
                         <li style={liStyle}>
-                            <i />
+                            <i/>
                         </li>
                     </ul>
                 </fieldset>
@@ -189,7 +191,7 @@ const formStyle = {
                 <div>
                     {message && (
                         <div className="form-group">
-                            <div style={{ backgroundColor: "#fdc0b4", padding: '15px' }}>
+                            <div style={{backgroundColor: "#fdc0b4", padding: '15px'}}>
                                 {message}
                             </div>
                         </div>

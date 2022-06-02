@@ -30,7 +30,7 @@ const Dashboard = (props) => {
 
         //setOne("hello");
         // --------------------
-        BaseService.HttpGet("graph/show002").then(
+        BaseService.HttpGet("installorder/inst/showGraph002").then(
             (response) => {
                 //console.log('response');
                 //console.log(JSON.stringify(response.data));
@@ -45,7 +45,7 @@ const Dashboard = (props) => {
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/selectDashbordCount").then(
+        BaseService.HttpGet("installorder/inst/selectDashbordCount").then(
             (response) => {
                 //console.log('response');
                 // console.log(JSON.stringify(response.data['UserCount'][0]));
@@ -64,7 +64,7 @@ const Dashboard = (props) => {
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/selectCurrentDataInstallOrder").then(
+        BaseService.HttpGet("installorder/inst/selectCurrentDataInstallOrder").then(
             (response) => {
                 //console.log('response');
                 //console.log(JSON.stringify(response.data));
@@ -79,10 +79,10 @@ const Dashboard = (props) => {
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/selecAreaGroupByState").then(
+        BaseService.HttpGet("installorder/inst/selecAreaGroupByState").then(
             (response) => {
                 //console.log('response');
-                // console.log(JSON.stringify(response.data));     
+                // console.log(JSON.stringify(response.data));
 
                 setContainer(response.data.map(
                     t => (
@@ -99,7 +99,6 @@ const Dashboard = (props) => {
                                 <span className="text-orange-500 ml-3 font-medium">{t.discount}</span>
                             </div>
                         </li>
-
                     )
                 )
                 );
@@ -444,8 +443,8 @@ const Dashboard = (props) => {
                     </ul>
                 </div>
 
-                
-               
+
+
             </div>
         </div>
     );

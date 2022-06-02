@@ -72,11 +72,7 @@ const Home = () => {
 
     let menuClick = false;
     let mobileTopbarMenuClick = false;
-/*
-    useEffect(() => {
-        reloadOnce();
-    }, [reloadHomepage]);
-*/
+
     useEffect(() => {
 
         if (mobileMenuActive) {
@@ -89,24 +85,6 @@ const Home = () => {
     useEffect(() => {
         copyTooltipRef && copyTooltipRef.current && copyTooltipRef.current.updateTargetEvents();
     }, [location]);
-
-    /*const reloadOnce = () => {
-        setTimeout(function() { //Start the timer
-            const value = sessionStorage.getItem("loadOnce");
-            
-            if(reloadHomepage){
-                //alert('reload done');
-                //setReloadHomepage(false);
-                //sessionStorage.setItem("loadOnce", false);
-                //navigation("/graphs");
-                //window.open("/", "_self");
-                window.open("/");
-                //alert(value);
-            }
-           
-
-        }.bind(this), 1000)
-      };*/
 
     const onInputStyleChange = (inputStyle) => {
         setInputStyle(inputStyle);
@@ -325,9 +303,9 @@ const Home = () => {
 
 // benkuramax section
 
-    
+
     const onMobileSubTopbarLOGOUT = (event) => {
-        
+
         event.preventDefault();
         localStorage.removeItem("user");
         navigation("/login");
@@ -340,9 +318,9 @@ const Home = () => {
             <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
 
             <AppTopbar onToggleMenuClick={onToggleMenuClick} layoutColorMode={layoutColorMode}
-                mobileTopbarMenuActive={mobileTopbarMenuActive} onMobileTopbarMenuClick={onMobileTopbarMenuClick} onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick} 
+                mobileTopbarMenuActive={mobileTopbarMenuActive} onMobileTopbarMenuClick={onMobileTopbarMenuClick} onMobileSubTopbarMenuClick={onMobileSubTopbarMenuClick}
                 onMobileSubTopbarLOGOUT={onMobileSubTopbarLOGOUT}
-               
+
                 />
 
             <div className="layout-sidebar" onClick={onSidebarClick}>
@@ -378,7 +356,7 @@ const Home = () => {
 
                     <Route path="/graphs" element ={ <Graphs colorMode={layoutColorMode} location={location} />} />
 
-                    
+
                 </Routes>
 
                 </div>
