@@ -49,6 +49,7 @@ import '../App.scss';
 
 import {useNavigate} from "react-router";
 import Graphs from '../pages/fragments/Graphs';
+import TestDemo from '../pages/fragments/Test'
 
 //#f1c40f
 
@@ -198,9 +199,11 @@ const Home = () => {
         },
         {
             label: 'JD System Pages',
-            items: [{
-                label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'
-            }]
+            items: [
+                {label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'},
+                {label: 'TestDemo', icon: 'pi pi-fw pi-chart-bar', to: 'testdemo'},
+                {label: 'Dashboard Responsive', icon: 'pi pi-fw pi-chart-bar', to: '/DashboardResponsive'}
+        ]
         },
         {
             label: 'UI Components', icon: 'pi pi-fw pi-sitemap',
@@ -377,6 +380,7 @@ const Home = () => {
                     <Route path="/documentation" element={<Documentation/>} />
 
                     <Route path="/graphs" element ={ <Graphs colorMode={layoutColorMode} location={location} />} />
+                    <Route path="/testdemo" element={<TestDemo colorMode={layoutColorMode} location={location} />} />
 
                     
                 </Routes>

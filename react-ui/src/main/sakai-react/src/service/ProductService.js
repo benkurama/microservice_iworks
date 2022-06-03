@@ -13,4 +13,8 @@ export class ProductService {
     getProductsWithOrdersSmall() {
         return axios.get('assets/demo/data/products-orders-small.json').then(res => res.data.data);
     }
+
+    getDashboardDatas(){
+        return axios.get('assets/demo/data/dashboard-charts.json').then(res => res.data.data);
+    }
 }

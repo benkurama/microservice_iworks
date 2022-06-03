@@ -7,6 +7,8 @@ import { Column } from 'primereact/column';
 import { ProductService } from '../../service/ProductService';
 import BaseService from '../../service/BaseService';
 
+import  '../../assets/css/dashboard.css';
+
 
 const Dashboard = (props) => {
     const [products, setProducts] = useState(null);
@@ -200,12 +202,15 @@ const Dashboard = (props) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
+    const css = {
+        
+    }
 
 
     return (
         <div className="grid">
             <div className="col-12 lg:col-6 xl:col-3">
-                <div className="card mb-0">
+                <div className="card mb-0" >
                     <div className="flex justify-content-between mb-3">
                         <div>
                             <span className="block text-500 font-medium mb-3">Users</span>
