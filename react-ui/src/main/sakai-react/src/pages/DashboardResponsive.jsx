@@ -4,7 +4,8 @@ import React from 'react';
 import '../assets/css/dashboard.css';
 
 import MapFrag from '../pages/fragments/MapFrag';
-import ChartFrag001 from '../pages/fragments/ChartFrag001';
+import ChartFrag from './fragments/ChartFrag';
+import CoverFlow from '../pages/fragments/CoverFlow';
 
 import {line001, line002, line003, line004} from '../assets/json/lineChart';
 import {bar001, bar002, bar003, bar004} from '../assets/json/barChart';
@@ -47,13 +48,18 @@ const DashboardResponsive = () => {
                 <div className="grid p-fluid">
                     <div className="col-12 lg:col-4" >
                        
-                        <ChartFrag001 param1={line001} param2={line002} param3={line003} param4={line004}              
+                        <ChartFrag param1={line001} param2={line002} param3={line003} param4={line004}              
                         playInterval={5000}
                         />
                         <br></br>
-                        <ChartFrag001 param1={pie005} param2={pie002} param3={pie003} param4={pie004}
-                       playInterval={9000}
-                       />
+                           {/*
+                            <ChartFrag param1={pie005} param2={pie002} param3={pie003} param4={pie004}
+                                playInterval={9000}
+                            /> 
+                           */}
+                            
+                          <CoverFlow param1={bar001} param2={bar002} param3={bar003} param4={bar004} />
+                            
 
                     </div>
                     <div className="col-12 lg:col-4">
@@ -62,15 +68,18 @@ const DashboardResponsive = () => {
                         <MapFrag />
                         
                     </div>
-                    <div className="col-12 lg:col-4">
+                        <div className="col-12 lg:col-4">
 
-                       <ChartFrag001 param1={bar001} param2={bar002} param3={bar003} param4={bar004}
-                       playInterval={7000}
-                       />
-                    <br></br>
-                       <ChartFrag001 param1={line001} param2={line002} param3={line003} param4={line004}              
-                        playInterval={3000}
-                        />
+                            <ChartFrag param1={bar001} param2={bar002} param3={bar003} param4={bar004}
+                                playInterval={7000}
+                            />
+                            <br></br>
+
+                            <CoverFlow param1={pie005} param2={pie002} param3={pie003} param4={pie004} />
+
+                        </div>
+
+                    <div className="col-12 lg:col-12" >
                         
                     </div>
                 </div>
