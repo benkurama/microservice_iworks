@@ -102,6 +102,9 @@
 		<module>react-ui</module>
 		<module>system-service</module>
 		<module>workorder-service</module>
+		<module>config-server</module>
+		<module>springboot-admin</module>
+		<module>auth-service</module>
 	</modules>
 
 </project>

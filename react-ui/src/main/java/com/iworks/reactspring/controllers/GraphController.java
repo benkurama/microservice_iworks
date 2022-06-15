@@ -62,6 +62,7 @@ public class GraphController {
         //  ====================================================================
         LineGraph lg = new LineGraph();
 
+
         lg.setLabels(dateStr);
         List<LineGraph.datasets> datasetsList = new ArrayList<>();
 

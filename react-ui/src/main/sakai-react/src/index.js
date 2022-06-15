@@ -11,10 +11,10 @@ import ScrollToTop from './ScrollToTop';
 ReactDOM.render(
     <BrowserRouter>
         <ScrollToTop>
-            <App></App>
-            {/* <Login /> */}
+            <App/>
         </ScrollToTop>
-    </BrowserRouter>,
+    </BrowserRouter>
+    ,
     document.getElementById('root')
 );
 

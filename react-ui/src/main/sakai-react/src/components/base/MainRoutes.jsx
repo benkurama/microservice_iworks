@@ -13,13 +13,11 @@ const MainRoutes = () => (
     <Routes>
 
         <Route path="/" element={<ProtectedRoutes />}>
-            
                 <Route path="/" element={<Home/>} />
                 <Route path="*" element={<Home/>} />
              
                 <Route path="/DashboardResponsive" element={<DashboardResponsive/>} />
         </Route>
-
 
         <Route path="login" element={<PublicRoutes />}>
             <Route path="/login" element={<Login/>} />

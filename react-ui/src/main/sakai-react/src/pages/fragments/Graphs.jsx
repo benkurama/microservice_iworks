@@ -15,9 +15,9 @@ const ChartDemo = (props) => {
     const [polar, setPolar] = useState(null)
 
     useEffect(() => {
-        
+
         // --------------------
-        BaseService.HttpGet("graph/show002").then(
+        BaseService.HttpGet("installorder/inst/showGraph002").then(
             (response) => {
                 //console.log('response');
                 //console.log(JSON.stringify(response.data));
@@ -36,12 +36,12 @@ const ChartDemo = (props) => {
                     if(_content.status == 401){
                         //window.location.reload();
                     }
-                    
+
 
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/show").then(
+        BaseService.HttpGet("installorder/inst/showGraph001").then(
             (response) => {
                 console.log('response');
                 console.log(JSON.stringify(response.data));
@@ -58,7 +58,7 @@ const ChartDemo = (props) => {
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/showReceiptGraph001").then(
+       BaseService.HttpGet("installorder/inst/showReceiptGraph001").then(
             (response) => {
                 console.log('response');
                 console.log(JSON.stringify(response.data));
@@ -75,7 +75,7 @@ const ChartDemo = (props) => {
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/showReceiptGraph002").then(
+        BaseService.HttpGet("installorder/inst/showReceiptGraph002").then(
             (response) => {
                 //console.log('response');
                 //console.log(JSON.stringify(response.data));
@@ -94,12 +94,12 @@ const ChartDemo = (props) => {
                     if(_content.status == 401){
                         //window.location.reload();
                     }
-                    
+
 
             }
         );
         // --------------------
-        BaseService.HttpGet("graph/selectTransHistoryGraph001").then(
+        BaseService.HttpGet("installorder/inst/selectTransHistoryGraph001").then(
             (response) => {
                 //console.log('response');
                 //console.log(JSON.stringify(response.data));
@@ -118,7 +118,7 @@ const ChartDemo = (props) => {
                     if(_content.status == 401){
                         //window.location.reload();
                     }
-                    
+
 
             }
         );
@@ -264,8 +264,8 @@ const ChartDemo = (props) => {
         };
 
         setLineOptions(lineOptions)
-        setPieOptions(pieOptions)
-        setBarOptions(barOptions)
+        //setPieOptions(pieOptions)
+        //setBarOptions(barOptions)
     }
 
     useEffect(() => {
