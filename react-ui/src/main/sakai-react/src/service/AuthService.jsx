@@ -1,7 +1,7 @@
 import axios from "axios";
 const API_URL = "http://localhost:8080/api/";
 const  login = (username,password) => {
-    console.log(username);
+    //console.log(username);
     return axios.post(API_URL + "sign-in", {
         username,
         password
@@ -13,6 +13,7 @@ const createJWTToken = (token) =>{
 };
 const logout   = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
 };
 
 const getCurrentUser = () => {
@@ -35,6 +36,9 @@ const setupAxiosInterceptors = (token) => {
             return config
         }
     ) */
+
+    localStorage.setItem('token', token );
+
     if(isUserLoggedIn()){
         axios.defaults.headers['Authorization'] = token;
     }else{

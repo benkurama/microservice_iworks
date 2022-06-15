@@ -12,6 +12,20 @@ const HttpGet002 = (host, path) => {
     return axios.get(host + path);
 };
 
+// benkuramax added
+
+let toks = localStorage.getItem('token');
+console.log(toks);
+
+axios.interceptors.request.use((config) => {
+    //console.log('axios.interceptors.request');
+    config.headers['Authorization'] = toks;
+    return config;
+}, (error) => {
+    console.log(JSON.stringify(error));
+    return Promise.reject(error);
+});
+
 const BaseService = {
     HttpGet,
     HttpGet002

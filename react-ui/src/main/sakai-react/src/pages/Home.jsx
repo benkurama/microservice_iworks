@@ -201,7 +201,7 @@ const Home = () => {
             label: 'JD System Pages',
             items: [
                 {label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'},
-                {label: 'TestDemo', icon: 'pi pi-fw pi-chart-bar', to: 'testdemo'},
+                
                 {label: 'Dashboard Responsive', icon: 'pi pi-fw pi-chart-bar', to: '/DashboardResponsive'}
         ]
         },
