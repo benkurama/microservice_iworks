@@ -1,5 +1,6 @@
 package com.microservice.workorder.service.controllers;
 
+import com.microservice.workorder.service.model.GraphsModel;
 import com.microservice.workorder.service.model.LineGraph;
 import com.microservice.workorder.service.repository.InstallOrderRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -39,8 +37,26 @@ public class InstalOrderController {
     }
 
     @GetMapping("/showGraph001")
-    public List<Map> showGraph001(){
-        return installOrderRepository.selectGraph001();
+    public GraphsModel showGraph001(){
+        //return installOrderRepository.selectGraph001();
+
+        List<Map> res = installOrderRepository.selectGraph001();
+        int count = res.size();
+        //  divider ----------
+        String[] lbl = res.stream().map(t-> t.get("dateStr").toString()).toArray(String[]::new);
+
+        long[] countData = res.stream().mapToLong(t-> (long)t.get("count")).toArray();
+
+        int[] intArray = Arrays.stream(countData).mapToInt(i -> (int) i).toArray();
+        //  divider ----------
+        GraphsModel gm = new GraphsModel();
+        gm.setLabels(lbl);
+
+        List<GraphsModel.datasets> datasetsList = new ArrayList<>();
+        datasetsList.add(new GraphsModel.datasets(intArray, bgColorList));
+        gm.setDatasets(datasetsList);
+
+        return gm;
     }
 
     @GetMapping("/showGraph002")
@@ -80,18 +96,95 @@ public class InstalOrderController {
     }
 
     @GetMapping("/showReceiptGraph001")
-    public List<Map> showReceiptGraph001(){
-        return installOrderRepository.selectReceiptGraph001();
+    public GraphsModel showReceiptGraph001(){
+        //return installOrderRepository.selectReceiptGraph001();
+
+        List<Map> res = installOrderRepository.selectReceiptGraph001();
+        int count = res.size();
+        //  divider ----------
+        String[] lbl = res.stream().map(t-> t.get("dateStr").toString()).toArray(String[]::new);
+
+        long[] countData = res.stream().mapToLong(t-> (long)t.get("count")).toArray();
+        int[] intArray = Arrays.stream(countData).mapToInt(i -> (int) i).toArray();
+
+        String[] bgColor = new String[count];
+        for(int i=0; i < count; i++){
+            bgColor[i] = bgColorList[i];
+        }
+        //  divider ----------
+        GraphsModel gm = new GraphsModel();
+        gm.setLabels(lbl);
+
+        List<GraphsModel.datasets> datasetsList = new ArrayList<>();
+        datasetsList.add(new GraphsModel.datasets(intArray, bgColor));
+        gm.setDatasets(datasetsList);
+
+        return gm;
     }
 
     @GetMapping("/showReceiptGraph002")
-    public List<Map> showReceiptGraph002(){
-        return installOrderRepository.selectReceiptGraph002();
+    public LineGraph showReceiptGraph002(){
+        //return installOrderRepository.selectReceiptGraph002();
+
+        List<Map> res = installOrderRepository.selectReceiptGraph002();
+
+        //>>>> Get all months by data list and save to dateStr array
+        Map<String, Long> mapRegsGroup = res.stream()
+                .collect(Collectors.groupingBy(map -> map.get("internalInstructionType").toString(),
+                        Collectors.counting() ));
+
+        Object[] obj = helper.me.GetAllMonths(res, mapRegsGroup, "internalInstructionType");
+
+        String[] dateStr = (String[]) obj[0];
+        int count = (int) obj[1];
+        //<<<<
+        //-------------------------
+        List<Map> mapList = helper.me.PopulateDataByMonth(mapRegsGroup, res, count, dateStr, "internalInstructionType");
+        //  ====================================================================
+        LineGraph lg = new LineGraph();
+
+        lg.setLabels(dateStr);
+        List<LineGraph.datasets> datasetsList = new ArrayList<>();
+
+        int iii=0;
+        for(Map map : mapList){
+            String subArea = map.get("label").toString();
+            int[] datas = (int[])map.get(subArea);
+            datasetsList.add(new LineGraph.datasets(subArea, datas, bgColorList[iii], bgColorList[iii]));
+            iii++;
+        }
+        lg.setDatasets(datasetsList);
+
+        return lg;
     }
 
     @GetMapping("/selectTransHistoryGraph001")
-    public List<Map> selectTransHistoryGraph001(){
-        return installOrderRepository.selectTransHistoryGraph001();
+    public GraphsModel selectTransHistoryGraph001(){
+        //return installOrderRepository.selectTransHistoryGraph001();
+
+        List<Map> res = installOrderRepository.selectTransHistoryGraph001();
+
+        int count = res.size();
+
+        String[] lbl = res.stream().map(x-> x.get("processType").toString()).toArray(String[]::new);
+
+        long[] countData = res.stream().mapToLong(x-> (long)x.get("count")).toArray();
+        int[] intArray = Arrays.stream(countData).mapToInt(i -> (int) i).toArray();
+
+        String[] bgColor = new String[count];
+        for(int i=0; i < count; i++){
+            bgColor[i] = bgColorList[i];
+        }
+        //  divider ----------
+        GraphsModel gm = new GraphsModel();
+        gm.setLabels(lbl);
+
+        List<GraphsModel.datasets> datasetsList = new ArrayList<>();
+        datasetsList.add(new GraphsModel.datasets(intArray, bgColor));
+        gm.setDatasets(datasetsList);
+
+        return gm;
+
     }
 
     @GetMapping("/selectDashbordCount")
@@ -120,7 +213,45 @@ public class InstalOrderController {
     @GetMapping("/selecAreaGroupByState")
     public List<Map> selecAreaGroupByState(){
 
-        return installOrderRepository.selecAreaGroupByState();
+        //return installOrderRepository.selecAreaGroupByState();
+
+        List<Map> res = installOrderRepository.selecAreaGroupByState();
+
+        /*List<String> list = res.stream().map(t -> t.get("total_count").toString()).collect(Collectors.toList());
+        List<String[]> li = list.stream().map(t-> t.split(",")).collect(Collectors.toList());*/
+
+        List<Map> rees = new ArrayList<>();
+
+        for(Map map : res){
+            int percentage = 0;
+            String sample = map.get("total_count").toString();
+
+            if(sample.contains("district")){
+                try {
+                    int val = sample.indexOf("district");
+                    String vall = sample.substring(val);
+                    int valll = vall.indexOf(",");
+                    valll = valll == -1? 0 : valll;
+                    String vallll = vall.substring(0, valll);
+
+                    String distCount = vallll.split(":")[1];
+                    int countDis = Integer.parseInt(distCount);
+
+                    percentage = countDis * 100 / 150;
+                }catch(Exception ee){
+                    String error = ee.getMessage();
+                }
+            }
+            String[] colors = {"bg-orange-500 h-full", "bg-cyan-500 h-full", "bg-teal-500 h-full", "bg-pink-500 h-full", "bg-purple-500 h-full"};
+            Random rn = new Random();
+
+            map.put("discount",percentage+"%");
+            int randomNumber = (int) (Math.random()*(5))+1;
+            map.put("color", colors[rn.nextInt(randomNumber)]);
+            rees.add(map);
+        }
+
+        return rees;
     }
 
     public enum helper{

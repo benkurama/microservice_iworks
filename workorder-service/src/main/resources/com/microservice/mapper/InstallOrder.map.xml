@@ -127,7 +127,7 @@
     </select>
 
     <select id="selectGraph001" resultType="Map">
-        select main.dateStr, count(1) count from
+        select main.dateStr, count(*) count from
         (
             select date_format(created, "%M-%Y") dateStr, created from install_order_header
         ) main
