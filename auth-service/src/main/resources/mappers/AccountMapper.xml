@@ -29,9 +29,11 @@
     <select id="findByUsername" resultMap="accountMap"
             parameterType="String">
         select
-            a.*
+            a.account_id,a.account_name,a.password_,r.role_id,r.name_
         from
            account a
+        inner join role_account ra on ra.account_id = a.account_id
+        inner join role r on r.role_id = ra.role_id
 
         where a.account_name = #{userName}
     </select>

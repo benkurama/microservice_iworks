@@ -1,5 +1,5 @@
 
-import axios from  '../components/base/axios';
+import axios from  "axios";//'../components/base/axios';
 
 const API_URL = "http://localhost:8090";
 const  login = async (username,password) => {
@@ -21,7 +21,7 @@ const createJWTToken = (token) =>{
 };
 const logout   = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    //localStorage.removeItem("token");
 };
 
 const getCurrentUser = () => {
@@ -45,7 +45,7 @@ const setupAxiosInterceptors = (token) => {
         }
     ) */
 
-    localStorage.setItem('token', token );
+    //localStorage.setItem('token', token );
 
     if(isUserLoggedIn()){
         axios.defaults.headers['Authorization'] = token;

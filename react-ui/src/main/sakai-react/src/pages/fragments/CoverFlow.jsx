@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 
 import ReactEcharts from "echarts-for-react"; 
-import {line001, line002, line003, line004} from '../../assets/json/lineChart';
+//import {line001, line002, line003, line004} from '../../assets/json/lineChart';
 import {bar001, bar002, bar003, bar004} from '../../assets/json/barChart';
 
 import '../../assets/css/coverflow.css';

@@ -1,11 +1,11 @@
 import '../assets/css/loginStyle.css';
-import React, {useContext, useRef, useState} from "react";
+import React, { useRef, useState} from "react";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import AuthService from "../service/AuthService";
 import {useNavigate} from 'react-router-dom';
-import AuthContext from "../context/AuthProvider";
+//import AuthContext from "../context/AuthProvider";
 //import CheckButton from "react-validation/build/button";
 
 
@@ -85,7 +85,7 @@ const formStyle = {
 };
 
 const Login = () => {
-    const {setAuth} = useContext(AuthContext);
+    //const {setAuth} = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -93,7 +93,7 @@ const Login = () => {
     //const checkBtn = useRef();
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
-    const from = window.location.pathname || "/";
+    //const from = window.location.pathname || "/";
 
     const onChangeUsername = (e) => {
         const username = e.target.value;

@@ -7,14 +7,13 @@ import fiberlog from './assets/images/fiberlog.png';
 export const AppTopbar = (props) => {
 
     const [currentUser, setCurrentUser] = useState("user");
+    const [role, setRole] = useState("");
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user) {
             setCurrentUser(user)
-            console.log(user.username);
-        }else{
-            console.log('null user');
+            setRole(user.roles[0].substring(5, user.roles[0].length));
         }
         
     }, []);
@@ -36,10 +35,16 @@ export const AppTopbar = (props) => {
 
                 <ul className={classNames("layout-topbar-menu lg:flex origin-top", {'layout-topbar-menu-mobile-active': props.mobileTopbarMenuActive })}>
                     
-                     <li>
+                    <li>
                         <button className="p-link layout-topbar-button" >
-                                {currentUser.username}
+                                {currentUser.username + ':'}
                         </button>
+                    </li>
+
+                    <li>
+                        <div style={{position:'relative', top:'13px', padding: '0px 0px 0px 30px'}}>
+                                {role}
+                        </div>
                     </li>
                     
                     <li>

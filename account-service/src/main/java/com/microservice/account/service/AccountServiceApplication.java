@@ -27,17 +27,17 @@ public class AccountServiceApplication {
 		return Sampler.ALWAYS_SAMPLE;
 	}*/
 
-	@Bean
+/*	@Bean // FOR ACCESSING YIDA APPLICATION ONLY
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedMethods("*")
-						.allowedOrigins("https://www.aliwork.com","https://uczkrh.aliwork.com")
+						.allowedOrigins("https://www.aliwork.com","https://uczkrh.aliwork.com","http://localhost:3000/")
 						.allowCredentials(true);
 			}
 		};
-	}
+	}*/
 
 }

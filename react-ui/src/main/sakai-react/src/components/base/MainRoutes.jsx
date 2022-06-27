@@ -1,5 +1,5 @@
 import React from "react";
-import {Navigate, Route, Routes} from "react-router";
+import { Route, Routes} from "react-router";
 
 import Login from "../../pages/Login";
 import Home from "../../pages/Home";
@@ -12,9 +12,9 @@ import ProtectedRoutes from "./ProtectedRoutes";
 const MainRoutes = () => (
     <Routes>
 
-        <Route path="/" element={<ProtectedRoutes />}>
+        <Route path="/" element={<ProtectedRoutes roleRequired={"ROLE_SUPER ADMINISTRATOR" | "TECHNICIAN"} />}>
                 <Route path="/" element={<Home/>} />
-                <Route path="*" element={<Home/>} />
+                <Route path="/*" element={<Home/>} />
              
                 <Route path="/DashboardResponsive" element={<DashboardResponsive/>} />
         </Route>

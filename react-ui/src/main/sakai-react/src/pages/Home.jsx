@@ -8,33 +8,10 @@ import { AppFooter } from '../AppFooter';
 import { AppMenu } from '../AppMenu';
 import { AppConfig } from '../AppConfig';
 
-import Dashboard from '../pages/fragments/Dashboard';
-import ButtonDemo from '../components/ButtonDemo';
-import ChartDemo from '../components/ChartDemo';
-import Documentation from '../components/Documentation';
-import FileDemo from '../components/FileDemo';
-import FloatLabelDemo from '../components/FloatLabelDemo';
-import FormLayoutDemo from '../components/FormLayoutDemo';
-import InputDemo from '../components/InputDemo';
-import ListDemo from '../components/ListDemo';
-import MenuDemo from '../components/MenuDemo';
-import MessagesDemo from '../components/MessagesDemo';
-import MiscDemo from '../components/MiscDemo';
-import OverlayDemo from '../components/OverlayDemo';
-import MediaDemo from '../components/MediaDemo';
-import PanelDemo from '../components/PanelDemo';
-import TableDemo from '../components/TableDemo';
-import TreeDemo from '../components/TreeDemo';
-import InvalidStateDemo from '../components/InvalidStateDemo';
-import BlocksDemo from '../components/BlocksDemo';
-import IconsDemo from '../components/IconsDemo';
-
-import Crud from './Crud';
-import EmptyPage from './EmptyPage';
-import TimelineDemo from './TimelineDemo';
 
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
+import { Toast } from 'primereact/toast';
 
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
@@ -48,8 +25,11 @@ import '../App.scss';
 
 
 import {useNavigate} from "react-router";
-import Graphs from '../pages/fragments/Graphs';
-import TestDemo from '../pages/fragments/Test'
+
+import BaseService from '../service/BaseService';
+
+import AuthService from "../service/AuthService";
+import LoadRoutes from '../pages/fragments/LoadRoutes'
 
 //#f1c40f
 
@@ -66,8 +46,11 @@ const Home = () => {
     const copyTooltipRef = useRef();
     const location = useLocation();
 
-    const [reloadHomepage, setReloadHomepage] = useState(true);
+    //const [reloadHomepage, setReloadHomepage] = useState(true);
     const navigation = useNavigate();
+    const [menu, setMenu] = useState(null);
+    const toast = useRef();
+
 
     PrimeReact.ripple = true;
 
@@ -86,6 +69,151 @@ const Home = () => {
     useEffect(() => {
         copyTooltipRef && copyTooltipRef.current && copyTooltipRef.current.updateTargetEvents();
     }, [location]);
+
+    useEffect(() => {// MENU MANAGER
+
+        const user = AuthService.getCurrentUser();
+
+        BaseService.HttpGet("system/menu/showMenuResources?role="+user.roles[0]).then(
+            //BaseService.HttpGet("account/acct/showMenuResources?role=" + user.roles[0]).then(
+            (response) => {
+                //toast.current.show({severity: '', summary: response.data, detail: ''});
+
+                if(response.data.length === 1 && user.roles[0] === 'ROLE_SUPER ADMINISTRATOR'){
+                    defaultMenu();
+                } else {
+                    setMenu(response.data);
+                }
+
+                //console.log(response.data.length);
+            },
+            (error) => {
+                const _content =
+                    (error.response && error.response.data) || error.message || error.toString();
+                console.log('error');
+                console.log(_content);
+
+            }
+        );
+
+
+    }, []);
+
+    const defaultMenu = () =>{
+
+        setMenu( [
+            {
+                label: 'Home',
+                items: [{
+                    label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
+                }]
+            },
+            {
+                label: 'JD System Pages',
+                items: [
+                    {label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'},
+                    
+                    {label: 'Dashboard Responsive', icon: 'pi pi-fw pi-chart-bar', to: '/DashboardResponsive'}
+            ]
+            },
+            {
+                label: 'UI Components', icon: 'pi pi-fw pi-sitemap',
+                items: [
+                    { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: 'formlayout' },
+                    { label: 'Input', icon: 'pi pi-fw pi-check-square', to: 'input' },
+                    { label: "Float Label", icon: "pi pi-fw pi-bookmark", to: "floatlabel" },
+                    { label: "Invalid State", icon: "pi pi-fw pi-exclamation-circle", to: "invalidstate" },
+                    { label: 'Button', icon: 'pi pi-fw pi-mobile', to: 'button' },
+                    { label: 'Table', icon: 'pi pi-fw pi-table', to: 'table' },
+                    { label: 'List', icon: 'pi pi-fw pi-list', to: 'list' },
+                    { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: 'tree' },
+                    { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: 'panel' },
+                    { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: 'overlay' },
+                    { label: "Media", icon: "pi pi-fw pi-image", to: "media" },
+                    { label: 'Menu', icon: 'pi pi-fw pi-bars', to: 'menu' },
+                    { label: 'Message', icon: 'pi pi-fw pi-comment', to: 'messages' },
+                    { label: 'File', icon: 'pi pi-fw pi-file', to: 'file' },
+                    { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: 'chart' },
+                    { label: 'Misc', icon: 'pi pi-fw pi-circle-off', to: 'misc' },
+                ]
+            },
+            ,
+        {
+            label: 'UI Blocks',
+            items: [
+                { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: 'blocks', badge: "NEW" },
+                { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://www.primefaces.org/primeblocks-react' }
+            ]
+        },
+        {
+            label: 'Icons',
+            items: [
+                { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: 'icons' }
+            ]
+        },
+        {
+            label: 'Pages', icon: 'pi pi-fw pi-clone',
+            items: [
+                { label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: 'crud' },
+                { label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: 'timeline' },
+                { label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: 'empty' }
+            ]
+        },
+        {
+            label: 'Menu Hierarchy', icon: 'pi pi-fw pi-search',
+            items: [
+                {
+                    label: 'Submenu 1', icon: 'pi pi-fw pi-bookmark',
+                    items: [
+                        {
+                            label: 'Submenu 1.1', icon: 'pi pi-fw pi-bookmark',
+                            items: [
+                                { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark', to:'graphs' },
+                                { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
+                                { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' },
+                            ]
+                        },
+                        {
+                            label: 'Submenu 1.2', icon: 'pi pi-fw pi-bookmark',
+                            items: [
+                                { label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' },
+                                { label: 'Submenu 1.2.2', icon: 'pi pi-fw pi-bookmark' }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    label: 'Submenu 2', icon: 'pi pi-fw pi-bookmark',
+                    items: [
+                        {
+                            label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
+                            items: [
+                                { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
+                                { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
+                                { label: 'Submenu 2.1.3', icon: 'pi pi-fw pi-bookmark' },
+                            ]
+                        },
+                        {
+                            label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
+                            items: [
+                                { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
+                                { label: 'Submenu 2.2.2', icon: 'pi pi-fw pi-bookmark' }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Get Started',
+            items: [
+                { label: 'Documentation', icon: 'pi pi-fw pi-question', command: () => { window.location = "#/documentation" } },
+                { label: 'View Source', icon: 'pi pi-fw pi-search', command: () => { window.location = "https://github.com/primefaces/sakai-react" } }
+            ]
+        }
+        ]);
+
+    }
 
     const onInputStyleChange = (inputStyle) => {
         setInputStyle(inputStyle);
@@ -168,116 +296,6 @@ const Home = () => {
         return window.innerWidth >= 992;
     }
 
-    const menu = [
-        {
-            label: 'Home',
-            items: [{
-                label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
-            }]
-        },
-        {
-            label: 'JD System Pages',
-            items: [
-                {label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'},
-                
-                {label: 'Dashboard Responsive', icon: 'pi pi-fw pi-chart-bar', to: '/DashboardResponsive'}
-        ]
-        },
-        {
-            label: 'UI Components', icon: 'pi pi-fw pi-sitemap',
-            items: [
-                { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: 'formlayout' },
-                { label: 'Input', icon: 'pi pi-fw pi-check-square', to: 'input' },
-                { label: "Float Label", icon: "pi pi-fw pi-bookmark", to: "floatlabel" },
-                { label: "Invalid State", icon: "pi pi-fw pi-exclamation-circle", to: "invalidstate" },
-                { label: 'Button', icon: 'pi pi-fw pi-mobile', to: 'button' },
-                { label: 'Table', icon: 'pi pi-fw pi-table', to: 'table' },
-                { label: 'List', icon: 'pi pi-fw pi-list', to: 'list' },
-                { label: 'Tree', icon: 'pi pi-fw pi-share-alt', to: 'tree' },
-                { label: 'Panel', icon: 'pi pi-fw pi-tablet', to: 'panel' },
-                { label: 'Overlay', icon: 'pi pi-fw pi-clone', to: 'overlay' },
-                { label: "Media", icon: "pi pi-fw pi-image", to: "media" },
-                { label: 'Menu', icon: 'pi pi-fw pi-bars', to: 'menu' },
-                { label: 'Message', icon: 'pi pi-fw pi-comment', to: 'messages' },
-                { label: 'File', icon: 'pi pi-fw pi-file', to: 'file' },
-                { label: 'Chart', icon: 'pi pi-fw pi-chart-bar', to: 'chart' },
-                { label: 'Misc', icon: 'pi pi-fw pi-circle-off', to: 'misc' },
-            ]
-        },
-        {
-            label: 'UI Blocks',
-            items: [
-                { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: 'blocks', badge: "NEW" },
-                { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://www.primefaces.org/primeblocks-react' }
-            ]
-        },
-        {
-            label: 'Icons',
-            items: [
-                { label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: 'icons' }
-            ]
-        },
-        {
-            label: 'Pages', icon: 'pi pi-fw pi-clone',
-            items: [
-                { label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: 'crud' },
-                { label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: 'timeline' },
-                { label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: 'empty' }
-            ]
-        },
-        {
-            label: 'Menu Hierarchy', icon: 'pi pi-fw pi-search',
-            items: [
-                {
-                    label: 'Submenu 1', icon: 'pi pi-fw pi-bookmark',
-                    items: [
-                        {
-                            label: 'Submenu 1.1', icon: 'pi pi-fw pi-bookmark',
-                            items: [
-                                { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' },
-                            ]
-                        },
-                        {
-                            label: 'Submenu 1.2', icon: 'pi pi-fw pi-bookmark',
-                            items: [
-                                { label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' },
-                                { label: 'Submenu 1.2.2', icon: 'pi pi-fw pi-bookmark' }
-                            ]
-                        },
-                    ]
-                },
-                {
-                    label: 'Submenu 2', icon: 'pi pi-fw pi-bookmark',
-                    items: [
-                        {
-                            label: 'Submenu 2.1', icon: 'pi pi-fw pi-bookmark',
-                            items: [
-                                { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' },
-                                { label: 'Submenu 2.1.3', icon: 'pi pi-fw pi-bookmark' },
-                            ]
-                        },
-                        {
-                            label: 'Submenu 2.2', icon: 'pi pi-fw pi-bookmark',
-                            items: [
-                                { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                                { label: 'Submenu 2.2.2', icon: 'pi pi-fw pi-bookmark' }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            label: 'Get Started',
-            items: [
-                { label: 'Documentation', icon: 'pi pi-fw pi-question', command: () => { window.location = "#/documentation" } },
-                { label: 'View Source', icon: 'pi pi-fw pi-search', command: () => { window.location = "https://github.com/primefaces/sakai-react" } }
-            ]
-        }
-    ];
 
     const addClass = (element, className) => {
         if (element.classList)
@@ -316,8 +334,13 @@ const Home = () => {
         //alert('logout');
     }
 
+
+
+    
+
     return (
         <div className={wrapperClass} onClick={onWrapperClick}>
+            <Toast ref={toast} />
             <Tooltip ref={copyTooltipRef} target=".block-action-copy" position="bottom" content="Copied to clipboard" event="focus" />
 
             <AppTopbar onToggleMenuClick={onToggleMenuClick} layoutColorMode={layoutColorMode}
@@ -332,36 +355,8 @@ const Home = () => {
 
             <div className="layout-main-container">
                 <div className="layout-main">
-                <Routes>
-                    <Route path="/" element={<Dashboard colorMode={layoutColorMode} location={location} />} />
-                    <Route path="/formlayout" element={<FormLayoutDemo />} />
-                    <Route path="/input" element={<InputDemo />} />
-                    <Route path="/floatlabel" element={<FloatLabelDemo/>} />
-                    <Route path="/invalidstate" element={<InvalidStateDemo/>} />
-                    <Route path="/button" element={<ButtonDemo/>} />
-                    <Route path="/table" element={<TableDemo/>} />
-                    <Route path="/list" element={<ListDemo/>} />
-                    <Route path="/tree" element={<TreeDemo/>} />
-                    <Route path="/panel" element={<PanelDemo/>} />
-                    <Route path="/overlay" element={<OverlayDemo/>} />
-                    <Route path="/media" element={<MediaDemo/>} />
-                    <Route path="/menu" element={<MenuDemo /> } />
-                    <Route path="/messages" element={<MessagesDemo/>} />
-                    <Route path="/blocks" element={<BlocksDemo/>} />
-                    <Route path="/icons" element={<IconsDemo/>} />
-                    <Route path="/file" component={<FileDemo/>} />
-                    <Route path="/chart" element ={ <ChartDemo colorMode={layoutColorMode} location={location} />} />
-                    <Route path="/misc" element={<MiscDemo/>} />
-                    <Route path="/timeline" element={<TimelineDemo/>} />
-                    <Route path="/crud" element={<Crud/>} />
-                    <Route path="/empty" element={<EmptyPage/>} />
-                    <Route path="/documentation" element={<Documentation/>} />
 
-                    <Route path="/graphs" element ={ <Graphs colorMode={layoutColorMode} location={location} />} />
-                    <Route path="/testdemo" element={<TestDemo colorMode={layoutColorMode} location={location} />} />
-
-
-                </Routes>
+                     <LoadRoutes colorMode={layoutColorMode} location={location}/ >
 
                 </div>
 

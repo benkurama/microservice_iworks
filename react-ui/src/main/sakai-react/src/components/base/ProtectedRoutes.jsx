@@ -7,10 +7,12 @@ const useAuth = () => {
     //get item from localstorage
     const _user = AuthService.getCurrentUser();
 
+    //console.log(_user.roles);
+
     if (_user) {
         return {
             auth: true,
-            role: _user.role,
+            role: _user.roles,
         }
     } else {
         return {
@@ -22,24 +24,25 @@ const useAuth = () => {
 
 //protected Route state
 type ProtectedRouteType = {
-    roleRequired?: "ADMIN" | "USER"
+    //roleRequired?: "ADMIN" | "USER"
+    roleRequired ?: "ROLE_SUPER ADMINISTRATOR" | "TECHNICIAN"
 }
 
 const ProtectedRoutes = (props: ProtectedRouteType) => {
     const {auth, role} = useAuth();
-console.log(role);
+
+    console.log("ProtectedRouteType");
+    //console.log(role[0]);
+    
     //if the role required is there or not
     if (props.roleRequired) {
+        console.log("roleRequired");
         return auth ? (
-            props.roleRequired === role ? (
-                <Outlet />
-            ) : (
-                <Navigate to="/denied" />
-            )
-        ) : (
-            <Navigate to="/login" />
-        )
+            props.roleRequired === role[0] ? (<Outlet /> ) : ( <Navigate to="/denied" /> )
+        ) : 
+            ( <Navigate to="/login" />  )
     } else {
+        console.log("else");
         return auth ? <Outlet /> : <Navigate to="/login" />
     }
 };

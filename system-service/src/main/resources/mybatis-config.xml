@@ -20,5 +20,6 @@
     </typeAliases>
     <mappers>
         <mapper resource="mappers/sys-resource.xml"/>
+        <mapper resource="mappers/system.map.xml"/>
     </mappers>
 </configuration>

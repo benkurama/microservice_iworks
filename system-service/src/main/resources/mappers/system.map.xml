@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microservice.systemservice.repository.SystemRepository">
+
+    <select id="findByRole" resultType="Map" parameterType="String">
+
+        select
+			r.NAME_,
+            s.RESOURCES_ID,s.PARENT_ID,
+            s.NAME_ PAGES,
+            s.CODE_,s.VALUE_,s.GRADE,s.SORT,s.TYPE_,s.VALUE_,s.ICON_URL,s.STATE,s.STATUS_
+        from
+           role r ,ROLE_RESOUCE o,RESOURCES s
+        where s.STATUS_=1
+          and s.STATE=1
+           and s.type_ != 3
+          and r.ROLE_ID=o.ROLE_ID
+          and o.RESOURCES_ID=s.RESOURCES_ID
+           and r.NAME_ = #{role}
+
+    </select>
+
+</mapper>

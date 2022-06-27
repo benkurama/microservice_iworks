@@ -39,6 +39,10 @@ public class SpringCloudConfig {
                         .filters(f -> f.filter(filter))
                         .uri("lb://system-service"))
 
+                .route("system-service", r -> r.path("/system/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://system-service"))
+
                 .build();
     }
 /*    @Bean

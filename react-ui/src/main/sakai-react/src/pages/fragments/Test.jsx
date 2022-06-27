@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { Carousel } from 'primereact/carousel';
-import { Button } from 'primereact/button';
+//import { Button } from 'primereact/button';
 import { ProductService } from '../../service/ProductService';
 import { PhotoService } from '../../service/PhotoService';
 import { Chart } from 'primereact/chart';

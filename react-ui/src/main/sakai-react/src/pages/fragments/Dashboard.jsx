@@ -4,14 +4,14 @@ import { Button } from 'primereact/button';
 import { Chart } from 'primereact/chart';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from '../../service/ProductService';
+//import { ProductService } from '../../service/ProductService';
 import BaseService from '../../service/BaseService';
 
 import  '../../assets/css/dashboard.css';
 
 
 const Dashboard = (props) => {
-    const [products, setProducts] = useState(null);
+    //const [products, setProducts] = useState(null);
     const menu1 = useRef(null);
     const menu2 = useRef(null);
     const [lineOptions, setLineOptions] = useState(null)
@@ -184,10 +184,10 @@ const Dashboard = (props) => {
         setLineOptions(lineOptions)
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         const productService = new ProductService();
         productService.getProductsSmall().then(data => setProducts(data));
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         if (props.colorMode === 'light') {
@@ -197,13 +197,13 @@ const Dashboard = (props) => {
         }
     }, [props.colorMode]);
 
-    const formatCurrency = (value) => {
+    /*const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    };
+    };*/
 
-    const css = {
+    /*const css = {
         
-    }
+    }*/
 
 
     return (
@@ -344,7 +344,7 @@ const Dashboard = (props) => {
                     </div>
                 </div>
 
-                <div className="card" style={{ display: "none" }}> /* temporary hide */
+                <div className="card" style={{ display: "none" }}> {/* temporary hide */}
                     <div className="flex justify-content-between align-items-center mb-5">
                         <h5>Best Selling Products</h5>
                         <div>
