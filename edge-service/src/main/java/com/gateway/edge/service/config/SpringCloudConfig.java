@@ -19,6 +19,11 @@ public class SpringCloudConfig {
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder){
         return builder.routes()
+
+                .route("inventory-service", r -> r.path("/inventory/**")
+                .filters(f -> f.filter(filter))
+                .uri("lb://inventory-service"))
+
                 .route("account-service", r -> r.path("/account/**")
                 .filters(f -> f.filter(filter))
                 .uri("lb://account-service"))

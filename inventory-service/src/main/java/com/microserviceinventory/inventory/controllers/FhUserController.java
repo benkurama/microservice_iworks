@@ -11,12 +11,18 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/fhuser/acct")
+@RequestMapping("/inventory/invt")
 @Slf4j
 public class FhUserController {
 
     @Autowired
     private FhUserRepository fhUserRepository;
+
+    @GetMapping("/show")
+    public String showString(){
+        log.info("INVENTORY-SERVICE IS IN THE HOUSE");
+        return "INVENTORY-SERVICE IS IN THE HOUSE";
+    }
 
     @GetMapping("/showAll")
     public List<Map> showAll(){

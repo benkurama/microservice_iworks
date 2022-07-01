@@ -112,7 +112,7 @@ const Home = () => {
                 label: 'JD System Pages',
                 items: [
                     {label: 'Graphs', icon: 'pi pi-fw pi-chart-bar', to: 'graphs'},
-                    
+
                     {label: 'Dashboard Responsive', icon: 'pi pi-fw pi-chart-bar', to: '/DashboardResponsive'}
             ]
             },
@@ -336,7 +336,7 @@ const Home = () => {
 
 
 
-    
+
 
     return (
         <div className={wrapperClass} onClick={onWrapperClick}>
@@ -356,7 +356,7 @@ const Home = () => {
             <div className="layout-main-container">
                 <div className="layout-main">
 
-                     <LoadRoutes colorMode={layoutColorMode} location={location}/ >
+                     <LoadRoutes colorMode={layoutColorMode} location={location} />
 
                 </div>
 
