@@ -30,4 +30,10 @@ public class FhUserController {
         return  userList;
     }
 
+    @GetMapping("/findByUsernamePassword")
+    public Map findByUsernamePassword(String username, String password){
+        Map user = fhUserRepository.findByUsernamePassword(username, password);
+        return user;
+    }
+
 }

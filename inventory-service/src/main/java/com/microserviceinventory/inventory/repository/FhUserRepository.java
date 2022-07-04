@@ -12,4 +12,6 @@ public interface FhUserRepository {
 
     List<Map> selectAll();
 
+    Map findByUsernamePassword(String username, String password);
+
 }

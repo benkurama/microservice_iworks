@@ -335,9 +335,6 @@ const Home = () => {
     }
 
 
-
-
-
     return (
         <div className={wrapperClass} onClick={onWrapperClick}>
             <Toast ref={toast} />

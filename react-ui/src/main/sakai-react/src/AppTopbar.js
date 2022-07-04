@@ -15,14 +15,14 @@ export const AppTopbar = (props) => {
             setCurrentUser(user)
             setRole(user.roles[0].substring(5, user.roles[0].length));
         }
-        
+
     }, []);
 
     return (
         <div className="layout-topbar">
             <Link to="/" className="layout-topbar-logo" >
                 <img src={fiberlog} alt="logo" />
-                <span>JD MICROSERVICE</span>
+                <span>Inventory System</span>
             </Link>
 
             <button type="button" className="p-link  layout-menu-button layout-topbar-button" onClick={props.onToggleMenuClick}>
@@ -34,7 +34,7 @@ export const AppTopbar = (props) => {
             </button>
 
                 <ul className={classNames("layout-topbar-menu lg:flex origin-top", {'layout-topbar-menu-mobile-active': props.mobileTopbarMenuActive })}>
-                    
+
                     <li>
                         <button className="p-link layout-topbar-button" >
                                 {currentUser.username + ':'}
@@ -46,7 +46,7 @@ export const AppTopbar = (props) => {
                                 {role}
                         </div>
                     </li>
-                    
+
                     <li>
                         <button className="p-link layout-topbar-button" onClick={props.onMobileSubTopbarMenuClick}>
                             <i className="pi pi-calendar"/>
@@ -72,7 +72,7 @@ export const AppTopbar = (props) => {
                         </button>
                     </li>
                     <li>
-                        
+
                     </li>
                 </ul>
         </div>
